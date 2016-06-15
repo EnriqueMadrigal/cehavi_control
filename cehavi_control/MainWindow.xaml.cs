@@ -38,19 +38,27 @@ namespace cehavi_control
 
         private void listaPacientes(object sender, RoutedEventArgs e)
         {
-            listapacientes  dlg1 = new listapacientes();
-            dlg1.ShowDialog();
-
+            listapacientes dlg1 = new listapacientes();
+            dlg1.ShowDialog(); 
 
         }
         private void muestraPaciente(object sender, RoutedEventArgs e)
         {
+            int curPaciente = 0;
+            listapacientes dlg1 = new listapacientes();
+            dlg1.ShowDialog();
+            curPaciente = dlg1.curPaciente;
 
-            paciente editPaciente = new paciente();
-            editPaciente.MdiParent =  this;
-            editPaciente.Show();
+            MessageBox.Show(curPaciente.ToString(), "Paciente");
+
           
 
+        }
+
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
     }

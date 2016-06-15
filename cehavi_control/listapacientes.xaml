@@ -1,0 +1,22 @@
+﻿<Window x:Class="cehavi_control.listapacientes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cehavi_control"
+        mc:Ignorable="d"
+        Title="Listado de pacientes" Height="412" Width="425" Initialized="Window_Initialized">
+    <Grid HorizontalAlignment="Left" Width="356" Margin="0,0,-64,0">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="361" Width="287" RenderTransformOrigin="0.238,0.064" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding IdPaciente}" Header="ID" Visibility="Hidden" />
+                <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre" />
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Button x:Name="button" Content="Seleecionar" HorizontalAlignment="Left" Margin="317,10,-48,0" VerticalAlignment="Top" Width="87" Click="button_Click"/>
+        <Button x:Name="button1" Content="Cancelar" HorizontalAlignment="Left" Margin="317,47,-48,0" VerticalAlignment="Top" Width="87" Click="button1_Click"/>
+
+    </Grid>
+</Window>

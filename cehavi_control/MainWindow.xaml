@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cehavi_control"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024">
+        Title="Cehavi" Height="768" Width="1024">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Sistema">
@@ -20,5 +20,25 @@
             </MenuItem>
         </Menu>
         <TextBox AcceptsReturn="True" />
+        <ToolBar x:Name="toolBar" Height="52" VerticalAlignment="Top">
+            <Button x:Name="button" Height="48" VerticalAlignment="Top" Width="48" Click="close_Click">
+                <Button.Content>
+                      <Image Source="C:\Users\MI PC Tech\Documents\Visual Studio 2015\Projects\cehavi_control\cehavi_control\res\stop.png" />
+                </Button.Content>
+            </Button>
+            <Separator Height="52" Margin="0" VerticalAlignment="Top" Width="2"/>
+            <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Click="muestraPaciente">
+                <Button.Content>
+                    <Image Source="C:\Users\MI PC Tech\Documents\Visual Studio 2015\Projects\cehavi_control\cehavi_control\res\directory.png" />
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="button3" Height="48" VerticalAlignment="Top" Width="48">
+                <Button.Content>
+                    <Image Source="C:\Users\MI PC Tech\Documents\Visual Studio 2015\Projects\cehavi_control\cehavi_control\res\customer.png" />
+                </Button.Content>
+            </Button>
+
+        </ToolBar>
     </DockPanel>
 </Window>
