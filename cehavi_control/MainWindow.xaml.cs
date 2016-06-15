@@ -49,7 +49,7 @@ namespace cehavi_control
             dlg1.ShowDialog();
             curPaciente = dlg1.curPaciente;
 
-            MessageBox.Show(curPaciente.ToString(), "Paciente");
+            MessageBox.Show(curPaciente.ToString(), "Paciente Seleccionado");
 
           
         }
