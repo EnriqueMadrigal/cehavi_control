@@ -23,19 +23,19 @@
         <ToolBar x:Name="toolBar" Height="52" VerticalAlignment="Top">
             <Button x:Name="button" Height="48" VerticalAlignment="Top" Width="48" Click="close_Click">
                 <Button.Content>
-                      <Image Source="C:\Users\MI PC Tech\Documents\Visual Studio 2015\Projects\cehavi_control\cehavi_control\res\stop.png" />
+                      <Image Source="C:\Datos\res\stop.png" />
                 </Button.Content>
             </Button>
             <Separator Height="52" Margin="0" VerticalAlignment="Top" Width="2"/>
             <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Click="muestraPaciente">
                 <Button.Content>
-                    <Image Source="C:\Users\MI PC Tech\Documents\Visual Studio 2015\Projects\cehavi_control\cehavi_control\res\directory.png" />
+                    <Image Source="C:\Datos\res\directory.png" />
                 </Button.Content>
             </Button>
 
             <Button x:Name="button3" Height="48" VerticalAlignment="Top" Width="48">
                 <Button.Content>
-                    <Image Source="C:\Users\MI PC Tech\Documents\Visual Studio 2015\Projects\cehavi_control\cehavi_control\res\customer.png" />
+                    <Image Source="C:\Datos\res\customer.png" />
                 </Button.Content>
             </Button>
 
