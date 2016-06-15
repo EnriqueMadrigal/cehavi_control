@@ -52,7 +52,6 @@ namespace cehavi_control
             MessageBox.Show(curPaciente.ToString(), "Paciente");
 
           
-
         }
 
 
