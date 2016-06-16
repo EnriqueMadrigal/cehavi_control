@@ -50,6 +50,10 @@ namespace cehavi_control
             curPaciente = dlg1.curPaciente;
 
             MessageBox.Show(curPaciente.ToString(), "Paciente Seleccionado");
+            editpaciente dlg2 = new editpaciente();
+            dlg2.SetPaciente(curPaciente);
+            dlg2.Show();
+
 
           
         }

@@ -56,6 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="editpaciente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="listapacientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -69,6 +73,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DatosCehavi.cs" />
+    <Compile Include="editpaciente.xaml.cs">
+      <DependentUpon>editpaciente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="listapacientes.xaml.cs">
       <DependentUpon>listapacientes.xaml</DependentUpon>
     </Compile>

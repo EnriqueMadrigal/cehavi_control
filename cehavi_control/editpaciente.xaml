@@ -1,0 +1,21 @@
+﻿<Window x:Class="cehavi_control.editpaciente"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cehavi_control"
+        mc:Ignorable="d"
+        Title="editpaciente" Height="300" Width="434.454" Loaded="Window_Loaded">
+    <Grid Margin="0,0,-128,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="215*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="62*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="label" Content="Nombre  completo del paciente:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="24" Width="181"/>
+        <TextBox x:Name="NombrePaciente" HorizontalAlignment="Left" Height="23" Margin="14,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
+        <Label x:Name="label1" Content="Fecha de nacimiento&#xD;&#xA;" HorizontalAlignment="Left" Margin="14,68,0,0" VerticalAlignment="Top" Height="24"/>
+        <DatePicker HorizontalAlignment="Left" Margin="14,97,0,0" VerticalAlignment="Top" KeyDown="DatePicker_KeyDown"/>
+
+    </Grid>
+</Window>
