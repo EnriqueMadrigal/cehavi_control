@@ -35,6 +35,5 @@
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="131" Margin="117,50,0,0" VerticalAlignment="Top" Width="119"/>
         <Button x:Name="button" Content="Obtener" Grid.Column="1" HorizontalAlignment="Left" Margin="117,186,0,0" VerticalAlignment="Top" Width="63"/>
         <Button x:Name="button1" Content="Cargar" Grid.Column="1" HorizontalAlignment="Left" Margin="185,186,0,0" VerticalAlignment="Top" Width="51"/>
-
     </Grid>
 </Window>
