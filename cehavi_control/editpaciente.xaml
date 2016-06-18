@@ -13,35 +13,7 @@
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="62*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="label" Content="Nombre  completo del paciente:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="24" Width="181" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="NombrePaciente" HorizontalAlignment="Left" Height="23" Margin="14,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Grid.ColumnSpan="2" FontSize="10"/>
-        <Label x:Name="label1" Content="Fecha de nacimiento&#xD;&#xA;" HorizontalAlignment="Left" Margin="14,99,0,0" VerticalAlignment="Top" Height="24"/>
-        <DatePicker x:Name="FechaNac_DatePicker" HorizontalAlignment="Left" Margin="14,122,0,0" VerticalAlignment="Top" KeyDown="DatePicker_KeyDown"/>
-        <GroupBox x:Name="groupBox" Header="Sexo" HorizontalAlignment="Left" Margin="14,149,0,0" VerticalAlignment="Top" Height="44" Width="171" Grid.ColumnSpan="2">
-            <Grid HorizontalAlignment="Left" Height="14" Margin="2,6,0,0" VerticalAlignment="Top" Width="157" RenderTransformOrigin="-0.128,-5.187">
-                <RadioButton x:Name="radioButton1" Content="Masculino" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.478,-0.332" Margin="0,-4,0,0"/>
-                <RadioButton x:Name="radioButton2" Content="Femenino" HorizontalAlignment="Left" Margin="83,-3,0,0" VerticalAlignment="Top"/>
-            </Grid>
-        </GroupBox>
 
-        <Label x:Name="label7" Content="Estado:" HorizontalAlignment="Left" Margin="14,234,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="69,235,0,0" VerticalAlignment="Top" Width="156" ItemsSource="{Binding}" Grid.ColumnSpan="2"/>
-
-
-        <Label x:Name="label2" Content="Grado:" HorizontalAlignment="Left" Margin="14,259,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="69,262,0,0" VerticalAlignment="Top" Width="156" ItemsSource="{Binding}" Grid.ColumnSpan="2"/>
-
-        <Label x:Name="label3" Content="Escuela:" HorizontalAlignment="Left" Margin="14,287,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="69,289,0,0" VerticalAlignment="Top" Width="251" ItemsSource="{Binding}" Grid.ColumnSpan="2"/>
-
-       
-        <Label x:Name="label4" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="14,328,0,0" VerticalAlignment="Top" Width="102"/>
-        <Label x:Name="label5" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="115,328,0,0" VerticalAlignment="Top" Width="239" Grid.ColumnSpan="2"/>
-        <Label x:Name="label6" Content="Comentarios:" HorizontalAlignment="Left" Margin="14,350,0,0" VerticalAlignment="Top" Width="102"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="75" Margin="14,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="2" AcceptsReturn="True"/>
-        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="131" Margin="117,50,0,0" VerticalAlignment="Top" Width="119" IsHitTestVisible="False" Source="C:\Datos\res\child1.png"/>
-        <Button x:Name="button" Content="Obtener" Grid.Column="1" HorizontalAlignment="Left" Margin="117,186,0,0" VerticalAlignment="Top" Width="63"/>
-        <Button x:Name="button1" Content="Cargar" Grid.Column="1" HorizontalAlignment="Left" Margin="185,186,0,0" VerticalAlignment="Top" Width="51"/>
         <ToolBar x:Name="toolBar" HorizontalAlignment="Left" Margin="14,2,0,0" VerticalAlignment="Top" Height="52" Width="396" Grid.ColumnSpan="2">
 
 
@@ -71,6 +43,78 @@
             </Button>
 
         </ToolBar>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="448" Margin="0,59,0,0" VerticalAlignment="Top" Width="430" Grid.ColumnSpan="2">
+            <TabItem Header="Generales" Height="22" VerticalAlignment="Top">
+                <Grid Background="#FFE5E5E5" Margin="0,1,-4,-1" >
+
+                    <Label x:Name="label" Content="Nombre  completo del paciente:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Height="24" Width="181"/>
+                    <TextBox x:Name="NombrePaciente" HorizontalAlignment="Left" Height="23" Margin="14,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="10"/>
+                    <Label x:Name="label1" Content="Fecha de nacimiento&#xD;&#xA;" HorizontalAlignment="Left" Margin="14,53,0,0" VerticalAlignment="Top" Height="24"/>
+                    <DatePicker x:Name="FechaNac_DatePicker" HorizontalAlignment="Left" Margin="14,76,0,0" VerticalAlignment="Top" KeyDown="DatePicker_KeyDown"/>
+                    <GroupBox x:Name="groupBox" Header="Sexo" HorizontalAlignment="Left" Margin="14,103,0,0" VerticalAlignment="Top" Height="44" Width="171">
+                        <Grid HorizontalAlignment="Left" Height="14" Margin="2,6,0,0" VerticalAlignment="Top" Width="157" RenderTransformOrigin="-0.128,-5.187">
+                            <RadioButton x:Name="radioButton1" Content="Masculino" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.478,-0.332" Margin="0,-4,0,0"/>
+                            <RadioButton x:Name="radioButton2" Content="Femenino" HorizontalAlignment="Left" Margin="83,-3,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <Label x:Name="label7" Content="Estado:" HorizontalAlignment="Left" Margin="14,159,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="69,160,0,0" VerticalAlignment="Top" Width="156" ItemsSource="{Binding}"/>
+
+
+                    <Label x:Name="label2" Content="Grado:" HorizontalAlignment="Left" Margin="14,184,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="69,187,0,0" VerticalAlignment="Top" Width="156" ItemsSource="{Binding}"/>
+
+                    <Label x:Name="label3" Content="Escuela:" HorizontalAlignment="Left" Margin="14,212,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="69,214,0,0" VerticalAlignment="Top" Width="251" ItemsSource="{Binding}"/>
+
+
+                    <Label x:Name="label4" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="14,245,0,0" VerticalAlignment="Top" Width="102"/>
+                    <Label x:Name="label5" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="115,245,0,0" VerticalAlignment="Top" Width="239"/>
+                    <Label x:Name="label6" Content="Comentarios:" HorizontalAlignment="Left" Margin="14,267,0,0" VerticalAlignment="Top" Width="102"/>
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="75" Margin="14,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396" AcceptsReturn="True"/>
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="131" Margin="296,9,0,0" VerticalAlignment="Top" Width="120" IsHitTestVisible="False" Source="C:\Datos\res\child1.png" RenderTransformOrigin="1.227,0.344"/>
+                    <Button x:Name="button" Content="Obtener" HorizontalAlignment="Left" Margin="283,144,0,0" VerticalAlignment="Top" Width="63"/>
+                    <Button x:Name="button1" Content="Cargar" HorizontalAlignment="Left" Margin="353,144,0,0" VerticalAlignment="Top" Width="51"/>
+
+
+
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Dirección" Height="24" VerticalAlignment="Top">
+                <Grid Background="#FFE5E5E5">
+                    <Label x:Name="label_Copy" Content="Calle:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Height="24" Width="47"/>
+                    <TextBox x:Name="Calle" HorizontalAlignment="Left" Height="23" Margin="14,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="318" FontSize="10"/>
+                    <Label x:Name="label_Copy1" Content="Colonia:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Height="24" Width="60"/>
+                    <TextBox x:Name="Colonia" HorizontalAlignment="Left" Height="23" Margin="14,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="318" FontSize="10"/>
+                    <Label x:Name="label_Copy2" Content="Ciudad:" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top" Height="24" Width="60"/>
+                    <TextBox x:Name="Ciudad" HorizontalAlignment="Left" Height="23" Margin="76,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" FontSize="10"/>
+                    <Label x:Name="label_Copy3" Content="Municipio:" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top" Height="23" Width="69"/>
+                    <TextBox x:Name="Municipio" HorizontalAlignment="Left" Height="23" Margin="76,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" FontSize="10"/>
+                    <Label x:Name="label_Copy4" Content="Estado:" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Height="23" Width="69"/>
+                    <ComboBox x:Name="comboBox4" HorizontalAlignment="Left" Margin="76,231,0,0" VerticalAlignment="Top" Width="148" ItemsSource="{Binding}"/>
+                    <Label x:Name="label_Copy5" Content="Telefono casa:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Height="23" Width="83"/>
+                    <TextBox x:Name="telefonocasa" HorizontalAlignment="Left" Height="23" Margin="99,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" FontSize="10"/>
+                    <Label x:Name="label_Copy6" Content="Móvil:" HorizontalAlignment="Left" Margin="186,280,0,0" VerticalAlignment="Top" Height="23" Width="51"/>
+                    <TextBox x:Name="telefonomovil" HorizontalAlignment="Left" Height="23" Margin="230,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91" FontSize="10"/>
+                    <Label x:Name="label_Copy7" Content="Telefono recados:" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top" Height="23" Width="103"/>
+                    <TextBox x:Name="telefonorecados" HorizontalAlignment="Left" Height="23" Margin="118,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" FontSize="10"/>
+                    <Label x:Name="label_Copy8" Content="C.P." HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top" Height="23" Width="83"/>
+                    <TextBox x:Name="Municipio_Copy3" HorizontalAlignment="Left" Height="23" Margin="77,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" FontSize="10"/>
+                    <Label x:Name="label_Copy9" Content="Número exterior:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Height="23" Width="103"/>
+                    <TextBox x:Name="exterior" HorizontalAlignment="Left" Height="23" Margin="113,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" FontSize="10"/>
+                    <Label x:Name="label_Copy10" Content="Interior:" HorizontalAlignment="Left" Margin="215,53,0,0" VerticalAlignment="Top" Height="23" Width="52"/>
+                    <TextBox x:Name="interior" HorizontalAlignment="Left" Height="23" Margin="270,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" FontSize="10"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Terapias" Height="24" VerticalAlignment="Top">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+
+        </TabControl>
 
     </Grid>
 </Window>

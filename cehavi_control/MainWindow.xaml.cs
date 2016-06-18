@@ -77,20 +77,57 @@ namespace cehavi_control
         {
 
 
-            return;
-            ArrayList valores = new ArrayList();
+            /*       
+                     ArrayList valores = new ArrayList();
 
+                     string[] estados =
+                     {"Aguascalientes",
+         "Baja California",
+         "Baja California Sur",
+         "Campeche",
+         "Coahuila",
+         "Colima",
+         "Chiapas",
+         "Chihuahua",
+         "Distrito Federal",
+         "Durango",
+         "Guanajuato",
+         "Guerrero",
+         "Hidalgo",
+         "Jalisco",
+         "México",
+         "Michoacán",
+         "Morelos",
+         "Nayarit",
+         "Nuevo León",
+         "Oaxaca",
+         "Puebla",
+         "Querétaro",
+         "Quintana Roo",
+         "San Luis Potosí",
+         "Sinaloa",
+         "Sonora",
+         "Tabasco",
+         "Tamaulipas",
+         "Tlaxcala",
+         "Veracruz",
+         "Yucatán",
+         "Zacatecas"};
 
+                     DatosCehavi datos1 = new DatosCehavi();
+                     datos1.Connect();
 
+                     for(int i=0;i<estados.Length;i++)
+                     {
+                         valores.Add(new Registro("Id", i+1));
+                         valores.Add(new Registro("Nombre", estados[i]));
+                         datos1.InsertData(valores, "Estados");
+                         valores.Clear();
 
-            valores.Add(new Registro("Id", 4));
-            valores.Add(new Registro("Nombre", "Suspención temporal"));
+                     }
+         */
 
-            DatosCehavi datos1 = new DatosCehavi();
-            datos1.Connect();
-
-            datos1.InsertData(valores, "estado_paciente");
-
+            
 
 
         }

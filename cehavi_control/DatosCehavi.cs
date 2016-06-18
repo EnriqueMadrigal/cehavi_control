@@ -358,6 +358,107 @@ namespace cehavi_control
         }
 
 
+        public bool executeQuery(string query)
+        {
+
+            try
+            {
+
+                OleDbCommand com = new OleDbCommand();
+
+                com.Connection = GetConnection();
+                com.CommandText = query;
+                com.ExecuteNonQuery();
+                //com.Dispose();
+
+            }
+
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Exception: {0}");
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+        public Int32 BuscaNombreTabla(string nombre, string tabla, string nombreIndex, string nombreCampo)
+        {
+            Int32 curId = 0;
+
+            // Busca si existe el indice
+
+            try
+            {
+                string query = "select " + nombreIndex + " where " + nombreCampo + "='" + nombre + "'";
+                OleDbCommand com = new OleDbCommand();
+
+                com.Connection = GetConnection();
+                com.CommandText = query;
+                OleDbDataReader resuldata = com.ExecuteReader();
+                
+                if(resuldata.HasRows)
+                {
+                    resuldata.Read();
+                    curId = resuldata.GetInt32(0);
+                }
+
+            
+
+
+            }
+
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Exception: {0}");
+                return 0;
+            }
+
+
+            return curId;
+        }
+
+
+
+        public Int32 InsertaNombreCampo(string nombre, string tabla, string nombreCampo)
+        {
+
+            Int32 curId = 0;
+
+
+            try
+            {
+                string query = "insert into " + tabla + "(" + nombreCampo + ")" + " values('" + nombre + "')" ;
+                string query2 = "Select @@Identity";
+
+                OleDbCommand com = new OleDbCommand();
+
+                com.Connection = GetConnection();
+                com.CommandText = query;
+                com.ExecuteNonQuery();
+
+                com.CommandText = query2;
+                curId = (Int32)com.ExecuteScalar();
+
+                //com.Dispose();
+
+            }
+
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Exception: {0}");
+                return 0;
+            }
+
+          return curId;
+
+
+        }
         /////////////////
 
     }
