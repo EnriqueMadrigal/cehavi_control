@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections;
 
 namespace cehavi_control
 {
@@ -70,6 +71,30 @@ namespace cehavi_control
         {
             this.Close();
         }
+
+
+        private void otraOpcion(object sender, RoutedEventArgs e)
+        {
+
+
+            return;
+            ArrayList valores = new ArrayList();
+
+
+
+
+            valores.Add(new Registro("Id", 4));
+            valores.Add(new Registro("Nombre", "Suspención temporal"));
+
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+
+            datos1.InsertData(valores, "estado_paciente");
+
+
+
+        }
+
 
     }
 }

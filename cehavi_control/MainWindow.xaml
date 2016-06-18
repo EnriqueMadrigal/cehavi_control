@@ -39,6 +39,14 @@
                 </Button.Content>
             </Button>
 
+
+            <Button x:Name="button10" Height="48" VerticalAlignment="Top" Width="48" Click="otraOpcion" HorizontalAlignment="Right">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\eye.png" />
+                </Button.Content>
+            </Button>
+
+
         </ToolBar>
     </DockPanel>
 </Window>

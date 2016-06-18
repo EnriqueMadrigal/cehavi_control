@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cehavi_control"
         mc:Ignorable="d"
-        Title="editpaciente" Height="440.336" Width="434.454" Loaded="Window_Loaded">
-    <Grid Margin="0,0,-128,0">
+        Title="editpaciente" Height="537.836" Width="434.454" Loaded="Window_Loaded">
+    <Grid Margin="0,2,-128,-2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="87*"/>
             <ColumnDefinition Width="128*"/>
@@ -23,15 +23,22 @@
                 <RadioButton x:Name="radioButton2" Content="Femenino" HorizontalAlignment="Left" Margin="83,-3,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
-        <Label x:Name="label2" Content="Grado:" HorizontalAlignment="Left" Margin="14,201,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="69,204,0,0" VerticalAlignment="Top" Width="156" ItemsSource="{Binding}" Grid.ColumnSpan="2"/>
 
-        <Label x:Name="label3" Content="Escuela:" HorizontalAlignment="Left" Margin="14,229,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="69,231,0,0" VerticalAlignment="Top" Width="251" ItemsSource="{Binding}" Grid.ColumnSpan="2"/>
-        <Label x:Name="label4" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="14,264,0,0" VerticalAlignment="Top" Width="102"/>
-        <Label x:Name="label5" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="115,264,0,0" VerticalAlignment="Top" Width="239" Grid.ColumnSpan="2"/>
-        <Label x:Name="label6" Content="Comentarios:" HorizontalAlignment="Left" Margin="14,286,0,0" VerticalAlignment="Top" Width="102"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="75" Margin="14,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="2" AcceptsReturn="True"/>
+        <Label x:Name="label7" Content="Estado:" HorizontalAlignment="Left" Margin="14,234,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="69,235,0,0" VerticalAlignment="Top" Width="156" ItemsSource="{Binding}" Grid.ColumnSpan="2"/>
+
+
+        <Label x:Name="label2" Content="Grado:" HorizontalAlignment="Left" Margin="14,259,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="69,262,0,0" VerticalAlignment="Top" Width="156" ItemsSource="{Binding}" Grid.ColumnSpan="2"/>
+
+        <Label x:Name="label3" Content="Escuela:" HorizontalAlignment="Left" Margin="14,287,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="69,289,0,0" VerticalAlignment="Top" Width="251" ItemsSource="{Binding}" Grid.ColumnSpan="2"/>
+
+       
+        <Label x:Name="label4" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="14,328,0,0" VerticalAlignment="Top" Width="102"/>
+        <Label x:Name="label5" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="115,328,0,0" VerticalAlignment="Top" Width="239" Grid.ColumnSpan="2"/>
+        <Label x:Name="label6" Content="Comentarios:" HorizontalAlignment="Left" Margin="14,350,0,0" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="75" Margin="14,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="2" AcceptsReturn="True"/>
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="131" Margin="117,50,0,0" VerticalAlignment="Top" Width="119" IsHitTestVisible="False" Source="C:\Datos\res\child1.png"/>
         <Button x:Name="button" Content="Obtener" Grid.Column="1" HorizontalAlignment="Left" Margin="117,186,0,0" VerticalAlignment="Top" Width="63"/>
         <Button x:Name="button1" Content="Cargar" Grid.Column="1" HorizontalAlignment="Left" Margin="185,186,0,0" VerticalAlignment="Top" Width="51"/>

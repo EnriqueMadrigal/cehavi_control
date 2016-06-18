@@ -26,6 +26,8 @@ namespace cehavi_control
         private DataTable DatosPaciente;
         private DataTable ComboEscuelas;
         private DataTable ComboGrados;
+        private DataTable ComboEstado;
+
 
         public editpaciente()
         {
@@ -65,15 +67,21 @@ namespace cehavi_control
             this.comboBox2.DisplayMemberPath = ComboEscuelas.Columns[1].ToString();
             this.comboBox2.SelectedValuePath = ComboEscuelas.Columns[0].ToString();
 
+            ComboEstado = datos1.LoadData("select * from estado_paciente");
+            this.comboBox3.ItemsSource = ComboEstado.DefaultView;
+            this.comboBox3.DisplayMemberPath = ComboEstado.Columns[1].ToString();
+            this.comboBox3.SelectedValuePath = ComboEstado.Columns[0].ToString();
+
 
 
             if (this.curPaciente != 0)
             {
-                this.DatosPaciente = datos1.LoadData("select Nombre,Comentarios,Sexo,IdEscuela,IdGradoEscuela, Datepart('yyyy',FechaNac),DatePart('m',FechaNac),Datepart('d',FechaNac) from pacientes where IdPaciente=" + this.curPaciente.ToString());
+                this.DatosPaciente = datos1.LoadData("select Nombre,Comentarios,Sexo,IdEscuela,IdGradoEscuela, Datepart('yyyy',FechaNac),DatePart('m',FechaNac),Datepart('d',FechaNac),estatus from pacientes where IdPaciente=" + this.curPaciente.ToString());
                 this.comboBox1.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["IdGradoEscuela"].ToString());
                 // ComboBoxZone.SelectedValue.ToString());
 
                 this.comboBox2.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["IdEscuela"].ToString());
+                this.comboBox3.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["estatus"].ToString());
 
                 String NombrePaciente = DatosPaciente.Rows[0]["Nombre"].ToString();
 
@@ -104,6 +112,7 @@ namespace cehavi_control
             {
                 this.comboBox1.SelectedValue = 1;
                 this.comboBox2.SelectedValue = 1;
+                this.comboBox3.SelectedValue = 1;
                 this.FechaNac_DatePicker.SelectedDate = DateTime.Today;
                 this.NombrePaciente.Text = "";
                 this.radioButton1.IsChecked = true;
@@ -168,7 +177,7 @@ namespace cehavi_control
             valores.Add(new Registro("IdGradoEscuela", this.comboBox1.SelectedValue));
             valores.Add(new Registro("IdEscuela", this.comboBox2.SelectedValue));
             valores.Add(new Registro("terapias", 1));
-            valores.Add(new Registro("estatus", 1));
+            valores.Add(new Registro("estatus", this.comboBox3.SelectedValue));
 
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
