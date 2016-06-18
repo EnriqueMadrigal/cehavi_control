@@ -32,8 +32,30 @@
         <Label x:Name="label5" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="115,264,0,0" VerticalAlignment="Top" Width="239" Grid.ColumnSpan="2"/>
         <Label x:Name="label6" Content="Comentarios:" HorizontalAlignment="Left" Margin="14,286,0,0" VerticalAlignment="Top" Width="102"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="75" Margin="14,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="2" AcceptsReturn="True"/>
-        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="131" Margin="117,50,0,0" VerticalAlignment="Top" Width="119"/>
+        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="131" Margin="117,50,0,0" VerticalAlignment="Top" Width="119" IsHitTestVisible="False" Source="C:\Datos\res\child1.png"/>
         <Button x:Name="button" Content="Obtener" Grid.Column="1" HorizontalAlignment="Left" Margin="117,186,0,0" VerticalAlignment="Top" Width="63"/>
         <Button x:Name="button1" Content="Cargar" Grid.Column="1" HorizontalAlignment="Left" Margin="185,186,0,0" VerticalAlignment="Top" Width="51"/>
+        <ToolBar x:Name="toolBar" HorizontalAlignment="Left" Margin="14,2,0,0" VerticalAlignment="Top" Height="52" Width="396" Grid.ColumnSpan="2">
+
+            <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Click="borraPaciente">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\exp.png" />
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="button3" Height="48" VerticalAlignment="Top" Width="48" Click="cargaPaciente">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\open.png" />
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="button4" Height="48" VerticalAlignment="Top" Width="48" Click="guardaPaciente">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\save.png" />
+                </Button.Content>
+            </Button>
+
+        </ToolBar>
+
     </Grid>
 </Window>

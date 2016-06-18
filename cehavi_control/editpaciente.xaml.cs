@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections;
 
 namespace cehavi_control
 {
@@ -41,57 +42,135 @@ namespace cehavi_control
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            CargaDatos();
 
+        }
+
+        private void CargaDatos()
+        {
+
+            ////////
 
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
-            this.DatosPaciente = datos1.LoadData("select Nombre,Comentarios,Sexo,IdEscuela,IdGradoEscuela, Datepart('yyyy',FechaNac),DatePart('m',FechaNac),Datepart('d',FechaNac) from pacientes where IdPaciente=" + this.curPaciente.ToString());
+
+
             ComboGrados = datos1.LoadData("select * from Grados");
             this.comboBox1.ItemsSource = ComboGrados.DefaultView;
             this.comboBox1.DisplayMemberPath = ComboGrados.Columns[1].ToString();
             this.comboBox1.SelectedValuePath = ComboGrados.Columns[0].ToString();
-            this.comboBox1.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["IdGradoEscuela"].ToString()); 
-            // ComboBoxZone.SelectedValue.ToString());
 
             ComboEscuelas = datos1.LoadData("select * from Escuelas");
             this.comboBox2.ItemsSource = ComboEscuelas.DefaultView;
             this.comboBox2.DisplayMemberPath = ComboEscuelas.Columns[1].ToString();
             this.comboBox2.SelectedValuePath = ComboEscuelas.Columns[0].ToString();
-            this.comboBox2.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["IdEscuela"].ToString());
 
 
 
-
-            String NombrePaciente = DatosPaciente.Rows[0]["Nombre"].ToString();
-            
-            Int32 AnoNac = Convert.ToInt32(DatosPaciente.Rows[0][5].ToString());
-            Int32 MesNac = Convert.ToInt32(DatosPaciente.Rows[0][6].ToString());
-            Int32 DiaNac = Convert.ToInt32(DatosPaciente.Rows[0][7].ToString());
-            Int32 Sexo =  Convert.ToInt32(DatosPaciente.Rows[0]["Sexo"].ToString());
-
-            this.FechaNac_DatePicker.SelectedDate = new DateTime(AnoNac, MesNac, DiaNac);
-
-            this.NombrePaciente.Text = NombrePaciente;
-
-            if (Sexo==1)
+            if (this.curPaciente != 0)
             {
-                this.radioButton1.IsChecked = true;
+                this.DatosPaciente = datos1.LoadData("select Nombre,Comentarios,Sexo,IdEscuela,IdGradoEscuela, Datepart('yyyy',FechaNac),DatePart('m',FechaNac),Datepart('d',FechaNac) from pacientes where IdPaciente=" + this.curPaciente.ToString());
+                this.comboBox1.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["IdGradoEscuela"].ToString());
+                // ComboBoxZone.SelectedValue.ToString());
 
-                this.radioButton2.IsChecked = false;
+                this.comboBox2.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["IdEscuela"].ToString());
+
+                String NombrePaciente = DatosPaciente.Rows[0]["Nombre"].ToString();
+
+                Int32 AnoNac = Convert.ToInt32(DatosPaciente.Rows[0][5].ToString());
+                Int32 MesNac = Convert.ToInt32(DatosPaciente.Rows[0][6].ToString());
+                Int32 DiaNac = Convert.ToInt32(DatosPaciente.Rows[0][7].ToString());
+                Int32 Sexo = Convert.ToInt32(DatosPaciente.Rows[0]["Sexo"].ToString());
+
+                this.FechaNac_DatePicker.SelectedDate = new DateTime(AnoNac, MesNac, DiaNac);
+
+                this.NombrePaciente.Text = NombrePaciente;
+
+                if (Sexo == 1)
+                {
+                    this.radioButton1.IsChecked = true;
+
+                    this.radioButton2.IsChecked = false;
+                }
+
+                else
+                {
+                    this.radioButton2.IsChecked = true;
+                    this.radioButton2.IsChecked = false;
+                }
+
             }
-            
+
             else
             {
-                this.radioButton2.IsChecked = true;
-                this.radioButton2.IsChecked = false;
-            } 
 
+                this.comboBox2.SelectedValue = 1;
+                this.FechaNac_DatePicker.SelectedDate = new DateTime();
+                this.NombrePaciente.Text = "";
+                this.radioButton1.IsChecked = true;
+                this.radioButton2.IsChecked = false;
+
+
+
+            }
+
+
+            /////////
         }
+
 
         private void DatePicker_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
-            
+
         }
+
+
+        private void borraPaciente(object sender, RoutedEventArgs e)
+        {
+            this.DatosPaciente.Clear();
+            this.comboBox2.SelectedValue = 1;
+            this.FechaNac_DatePicker.SelectedDate = DateTime.Today;
+            this.NombrePaciente.Text = "";
+            this.radioButton1.IsChecked = true;
+            this.radioButton2.IsChecked = false;
+            this.curPaciente = 0;
+
+        }
+
+
+        private void cargaPaciente(object sender, RoutedEventArgs e)
+        {
+            listapacientes dlg1 = new listapacientes();
+            dlg1.ShowDialog();
+            this.curPaciente = dlg1.curPaciente;
+            CargaDatos();
+
+        }
+
+        private void guardaPaciente(object sender, RoutedEventArgs e)
+        {
+
+            ArrayList valores = new ArrayList();
+            int Sexo = 1;
+            if (this.radioButton2.IsChecked.Value) Sexo = 2;
+
+            valores.Add(new Registro("Nombre", this.NombrePaciente.Text));
+            valores.Add(new Registro("FechaNac", this.FechaNac_DatePicker.SelectedDate));
+            valores.Add(new Registro("Sexo", Sexo));
+            valores.Add(new Registro("IdGradoEscuela", this.comboBox2.SelectedValue));
+            valores.Add(new Registro("IdEscuela", this.comboBox2.SelectedValue));
+
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+            datos1.UpdateData(valores, this.curPaciente,"IdPaciente","Pacientes");
+
+
+
+
+        }
+
+
     }
 }
+

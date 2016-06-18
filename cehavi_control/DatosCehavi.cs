@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.OleDb;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace cehavi_control
 {
@@ -64,6 +65,24 @@ namespace cehavi_control
 
 
 
+
+        }
+
+
+        public bool UpdateData(ArrayList datos, int curRegistro, string NameIndex, string Table)
+        {
+
+            OleDbCommand updateCommand = new OleDbCommand("UPDATE " + Table + " SET CustomerID = ?, CompanyName = ? " + "WHERE CustomerID = ?");
+
+            foreach (Registro c in datos)
+            {
+
+                MessageBox.Show("TipoDato: {0}", c.getValue().GetType().ToString());
+                MessageBox.Show("TipoDato: {0}", c.getValue().ToString());
+
+            }
+
+            return true;
 
         }
 
