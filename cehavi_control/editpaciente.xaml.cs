@@ -89,23 +89,22 @@ namespace cehavi_control
                 if (Sexo == 1)
                 {
                     this.radioButton1.IsChecked = true;
-
                     this.radioButton2.IsChecked = false;
                 }
 
                 else
                 {
                     this.radioButton2.IsChecked = true;
-                    this.radioButton2.IsChecked = false;
+                    this.radioButton1.IsChecked = false;
                 }
 
             }
 
             else
             {
-
+                this.comboBox1.SelectedValue = 1;
                 this.comboBox2.SelectedValue = 1;
-                this.FechaNac_DatePicker.SelectedDate = new DateTime();
+                this.FechaNac_DatePicker.SelectedDate = DateTime.Today;
                 this.NombrePaciente.Text = "";
                 this.radioButton1.IsChecked = true;
                 this.radioButton2.IsChecked = false;
@@ -126,6 +125,13 @@ namespace cehavi_control
         }
 
 
+
+        private void cancelaCambios(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+       
+
         private void borraPaciente(object sender, RoutedEventArgs e)
         {
             this.DatosPaciente.Clear();
@@ -143,9 +149,10 @@ namespace cehavi_control
         {
             listapacientes dlg1 = new listapacientes();
             dlg1.ShowDialog();
-            this.curPaciente = dlg1.curPaciente;
-            CargaDatos();
+            int newPaciente = dlg1.curPaciente;
 
+            if (newPaciente != 0)   CargaDatos();
+            
         }
 
         private void guardaPaciente(object sender, RoutedEventArgs e)
@@ -158,14 +165,18 @@ namespace cehavi_control
             valores.Add(new Registro("Nombre", this.NombrePaciente.Text));
             valores.Add(new Registro("FechaNac", this.FechaNac_DatePicker.SelectedDate));
             valores.Add(new Registro("Sexo", Sexo));
-            valores.Add(new Registro("IdGradoEscuela", this.comboBox2.SelectedValue));
+            valores.Add(new Registro("IdGradoEscuela", this.comboBox1.SelectedValue));
             valores.Add(new Registro("IdEscuela", this.comboBox2.SelectedValue));
+            valores.Add(new Registro("terapias", 1));
+            valores.Add(new Registro("estatus", 1));
 
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
-            datos1.UpdateData(valores, this.curPaciente,"IdPaciente","Pacientes");
+            if (this.curPaciente != 0) datos1.UpdateData(valores, this.curPaciente, "IdPaciente", "pacientes");
+            else datos1.InsertData(valores,"pacientes");
 
 
+            this.Close();
 
 
         }
@@ -173,4 +184,5 @@ namespace cehavi_control
 
     }
 }
+
 

@@ -35,6 +35,10 @@ namespace cehavi_control
             return this.CurrentValue;
         }
         
+        public string GetName()
+        {
+            return this.NombreString;
+        }
 
     }
 }

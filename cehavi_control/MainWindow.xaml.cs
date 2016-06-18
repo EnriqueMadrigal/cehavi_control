@@ -49,6 +49,8 @@ namespace cehavi_control
             dlg1.ShowDialog();
             curPaciente = dlg1.curPaciente;
 
+            if (curPaciente == 0) return;
+
            // MessageBox.Show(curPaciente.ToString(), "Paciente Seleccionado");
             editpaciente dlg2 = new editpaciente();
             dlg2.SetPaciente(curPaciente);
@@ -58,6 +60,11 @@ namespace cehavi_control
           
         }
 
+        private void newPaciente(object sender, RoutedEventArgs e)
+        {
+            editpaciente dlg2 = new editpaciente();
+            dlg2.ShowDialog();
+        }
 
         private void close_Click(object sender, RoutedEventArgs e)
         {

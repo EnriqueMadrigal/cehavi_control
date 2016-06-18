@@ -14,7 +14,7 @@
             <ColumnDefinition Width="62*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="label" Content="Nombre  completo del paciente:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="24" Width="181" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="NombrePaciente" HorizontalAlignment="Left" Height="23" Margin="14,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="NombrePaciente" HorizontalAlignment="Left" Height="23" Margin="14,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Grid.ColumnSpan="2" FontSize="10"/>
         <Label x:Name="label1" Content="Fecha de nacimiento&#xD;&#xA;" HorizontalAlignment="Left" Margin="14,99,0,0" VerticalAlignment="Top" Height="24"/>
         <DatePicker x:Name="FechaNac_DatePicker" HorizontalAlignment="Left" Margin="14,122,0,0" VerticalAlignment="Top" KeyDown="DatePicker_KeyDown"/>
         <GroupBox x:Name="groupBox" Header="Sexo" HorizontalAlignment="Left" Margin="14,149,0,0" VerticalAlignment="Top" Height="44" Width="171" Grid.ColumnSpan="2">
@@ -36,6 +36,14 @@
         <Button x:Name="button" Content="Obtener" Grid.Column="1" HorizontalAlignment="Left" Margin="117,186,0,0" VerticalAlignment="Top" Width="63"/>
         <Button x:Name="button1" Content="Cargar" Grid.Column="1" HorizontalAlignment="Left" Margin="185,186,0,0" VerticalAlignment="Top" Width="51"/>
         <ToolBar x:Name="toolBar" HorizontalAlignment="Left" Margin="14,2,0,0" VerticalAlignment="Top" Height="52" Width="396" Grid.ColumnSpan="2">
+
+
+            <Button x:Name="button0" Height="48" VerticalAlignment="Top" Width="48" Click="cancelaCambios">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\stop.png" />
+                </Button.Content>
+            </Button>
+
 
             <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Click="borraPaciente">
                 <Button.Content>

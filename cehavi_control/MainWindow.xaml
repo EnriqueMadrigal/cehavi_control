@@ -33,7 +33,7 @@
                 </Button.Content>
             </Button>
 
-            <Button x:Name="button3" Height="48" VerticalAlignment="Top" Width="48">
+            <Button x:Name="button3" Height="48" VerticalAlignment="Top" Width="48" Click="newPaciente">
                 <Button.Content>
                     <Image Source="C:\Datos\res\customer.png" />
                 </Button.Content>

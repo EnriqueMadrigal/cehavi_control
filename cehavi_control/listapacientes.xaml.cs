@@ -52,6 +52,8 @@ namespace cehavi_control
             DataGridCellInfo curcell = dataGrid.CurrentCell;
 
             object item = dataGrid.SelectedItem;
+
+            if (item == null) return;
             string ID = (dataGrid.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
             //MessageBox.Show(ID);
 
