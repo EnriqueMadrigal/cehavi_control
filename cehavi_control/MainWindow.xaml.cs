@@ -75,60 +75,78 @@ namespace cehavi_control
 
         private void otraOpcion(object sender, RoutedEventArgs e)
         {
+            /*
 
-
-            /*       
+                
                      ArrayList valores = new ArrayList();
+          
+                   string[] estados =
+                   {"Aguascalientes",
+       "Baja California",
+       "Baja California Sur",
+       "Campeche",
+       "Coahuila",
+       "Colima",
+       "Chiapas",
+       "Chihuahua",
+       "Distrito Federal",
+       "Durango",
+       "Guanajuato",
+       "Guerrero",
+       "Hidalgo",
+       "Jalisco",
+       "México",
+       "Michoacán",
+       "Morelos",
+       "Nayarit",
+       "Nuevo León",
+       "Oaxaca",
+       "Puebla",
+       "Querétaro",
+       "Quintana Roo",
+       "San Luis Potosí",
+       "Sinaloa",
+       "Sonora",
+       "Tabasco",
+       "Tamaulipas",
+       "Tlaxcala",
+       "Veracruz",
+       "Yucatán",
+       "Zacatecas"};
 
-                     string[] estados =
-                     {"Aguascalientes",
-         "Baja California",
-         "Baja California Sur",
-         "Campeche",
-         "Coahuila",
-         "Colima",
-         "Chiapas",
-         "Chihuahua",
-         "Distrito Federal",
-         "Durango",
-         "Guanajuato",
-         "Guerrero",
-         "Hidalgo",
-         "Jalisco",
-         "México",
-         "Michoacán",
-         "Morelos",
-         "Nayarit",
-         "Nuevo León",
-         "Oaxaca",
-         "Puebla",
-         "Querétaro",
-         "Quintana Roo",
-         "San Luis Potosí",
-         "Sinaloa",
-         "Sonora",
-         "Tabasco",
-         "Tamaulipas",
-         "Tlaxcala",
-         "Veracruz",
-         "Yucatán",
-         "Zacatecas"};
+                   DatosCehavi datos1 = new DatosCehavi();
+                   datos1.Connect();
 
-                     DatosCehavi datos1 = new DatosCehavi();
-                     datos1.Connect();
+                   for(int i=0;i<estados.Length;i++)
+                   {
+                       valores.Add(new Registro("Id", i+1));
+                       valores.Add(new Registro("Nombre", estados[i]));
+                       datos1.InsertData(valores, "Estados");
+                       valores.Clear();
 
-                     for(int i=0;i<estados.Length;i++)
-                     {
-                         valores.Add(new Registro("Id", i+1));
-                         valores.Add(new Registro("Nombre", estados[i]));
-                         datos1.InsertData(valores, "Estados");
-                         valores.Clear();
+                   }
 
-                     }
-         */
+  */
+            DatosCehavi datos1 = new DatosCehavi();
+           datos1.Connect();
+            datos1.executeQuery("insert into colonia(Nombre) values('La estancia')");
+            datos1.executeQuery("insert into colonia(Nombre) values('Chapalita')");
+            datos1.executeQuery("insert into colonia(Nombre) values('Chapalita de occidente')");
+            datos1.executeQuery("insert into colonia(Nombre) values('El Colli Urbano')");
+            datos1.executeQuery("insert into colonia(Nombre) values('La Calma')");
+            datos1.executeQuery("insert into colonia(Nombre) values('Chapultepec Country')");
+            datos1.executeQuery("insert into colonia(Nombre) values('Vallarta Poniente')");
+            datos1.executeQuery("insert into colonia(Nombre) values('Ciudad del Sol')");
+            datos1.executeQuery("insert into colonia(Nombre) values('Arboledas')");
+            datos1.executeQuery("insert into colonia(Nombre) values('Residencial Vallarta')");
+            datos1.executeQuery("insert into colonia(Nombre) values('Residencial Moctezuma')");
 
-            
 
+
+
+            //datos1.executeQuery("delete from Colonia where Nombre=''");
+            //datos1.executeQuery("delete from Ciudad where Nombre=''");
+            //datos1.executeQuery("update pacientes set idestado=14");
 
         }
 

@@ -101,11 +101,28 @@
                     <Label x:Name="label_Copy7" Content="Telefono recados:" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top" Height="23" Width="103"/>
                     <TextBox x:Name="telefonorecados" HorizontalAlignment="Left" Height="23" Margin="118,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" FontSize="10"/>
                     <Label x:Name="label_Copy8" Content="C.P." HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top" Height="23" Width="83"/>
-                    <TextBox x:Name="Municipio_Copy3" HorizontalAlignment="Left" Height="23" Margin="77,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" FontSize="10"/>
+                    <TextBox x:Name="CodigoPostal" HorizontalAlignment="Left" Height="23" Margin="77,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" FontSize="10"/>
                     <Label x:Name="label_Copy9" Content="Número exterior:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Height="23" Width="103"/>
                     <TextBox x:Name="exterior" HorizontalAlignment="Left" Height="23" Margin="113,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" FontSize="10"/>
                     <Label x:Name="label_Copy10" Content="Interior:" HorizontalAlignment="Left" Margin="215,53,0,0" VerticalAlignment="Top" Height="23" Width="52"/>
                     <TextBox x:Name="interior" HorizontalAlignment="Left" Height="23" Margin="270,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" FontSize="10"/>
+                    <Label x:Name="label_Copy11" Content="Correo electronico:" HorizontalAlignment="Left" Margin="10,338,0,0" VerticalAlignment="Top" Height="23" Width="114"/>
+                    <TextBox x:Name="email" HorizontalAlignment="Left" Height="23" Margin="120,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" FontSize="10"/>
+
+                    <Button x:Name="button20" Height="24" VerticalAlignment="Top" Width="24" Click="buscaColonia"  Margin="290,112,0,0">
+                        <Image Source="C:\Datos\res\search.png" />
+                    </Button>
+
+                    <Button x:Name="button21" Height="24" VerticalAlignment="Top" Width="24" Click="buscaCiudad"  Margin="232,141,168,0">
+                        <Image Source="C:\Datos\res\search.png" />
+                    </Button>
+
+                    <Button x:Name="button22" Height="24" VerticalAlignment="Top" Width="24" Click="buscaMunicipio"  Margin="232,167,168,0">
+                        <Image Source="C:\Datos\res\search.png" />
+                    </Button>
+
+
+
                 </Grid>
             </TabItem>
 

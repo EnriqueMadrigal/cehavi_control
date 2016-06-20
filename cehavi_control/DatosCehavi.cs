@@ -32,7 +32,7 @@ namespace cehavi_control
 
             catch (Exception e)
              {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: Connect");
                 return false;
             }
 
@@ -74,7 +74,7 @@ namespace cehavi_control
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: LoadData");
                 return null;
             }
 
@@ -133,7 +133,7 @@ namespace cehavi_control
             query = query.Remove(query.Length - 1);
             query = query + " WHERE " + NameIndex + "=" + curRegistro.ToString();
 
-            //MessageBox.Show(query, "Query");
+            MessageBox.Show(query, "Query");
 
 
 
@@ -152,7 +152,7 @@ namespace cehavi_control
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: UpdateData");
                 return false;
             }
 
@@ -262,7 +262,7 @@ namespace cehavi_control
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: InsertData");
                 return false;
             }
 
@@ -307,7 +307,7 @@ namespace cehavi_control
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: GetCreated");
                 return false;
             }
 
@@ -349,7 +349,7 @@ namespace cehavi_control
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: GetModified");
                 return false;
             }
 
@@ -376,7 +376,7 @@ namespace cehavi_control
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: executeQuery");
                 return false;
             }
 
@@ -391,9 +391,11 @@ namespace cehavi_control
 
             // Busca si existe el indice
 
+            if (nombre.Length == 0) return 0;
+
             try
             {
-                string query = "select " + nombreIndex + " where " + nombreCampo + "='" + nombre + "'";
+                string query = "select " + nombreIndex + " from " + tabla +  " where " + nombreCampo + "='" + nombre + "'";
                 OleDbCommand com = new OleDbCommand();
 
                 com.Connection = GetConnection();
@@ -414,7 +416,7 @@ namespace cehavi_control
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: BuscaNombre");
                 return 0;
             }
 
@@ -428,7 +430,7 @@ namespace cehavi_control
         {
 
             Int32 curId = 0;
-
+            if (nombre.Length == 0) return 0;
 
             try
             {
@@ -451,7 +453,7 @@ namespace cehavi_control
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: {0}");
+                MessageBox.Show(e.Message, "Exception: InsertaNombreCampo");
                 return 0;
             }
 
@@ -459,6 +461,80 @@ namespace cehavi_control
 
 
         }
+
+        public string GetNombreTabla(Int32 numRegistro, string tabla, string indexName, string nombreIndex)
+        {
+
+            string curNombre = "";
+
+            try
+            {
+                string query = "select " + nombreIndex + " from " + tabla + " where " + indexName + "=" + numRegistro.ToString();
+                OleDbCommand com = new OleDbCommand();
+
+                com.Connection = GetConnection();
+                com.CommandText = query;
+                OleDbDataReader resuldata = com.ExecuteReader();
+
+                if (resuldata.HasRows)
+                {
+                    resuldata.Read();
+                    curNombre = resuldata.GetString(0);
+                }
+            }
+
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Exception: GetNombreTabla");
+                return "";
+            }
+
+
+            return curNombre;
+
+        }
+
+
+        public AutoCompleteStringCollection GetAutoCompleteCollection(string tabla, string nombreIndex)
+        {
+            AutoCompleteStringCollection MyCollection = new AutoCompleteStringCollection();
+
+
+            try
+            {
+                string query = "select " + nombreIndex + " from " + tabla;
+                OleDbCommand com = new OleDbCommand();
+
+                com.Connection = GetConnection();
+                com.CommandText = query;
+                OleDbDataReader resuldata = com.ExecuteReader();
+
+                if (resuldata.HasRows)
+                {
+
+
+                    while (resuldata.Read() )
+                    {
+                        MyCollection.Add(resuldata.GetString(0));
+                    }
+
+                }
+                
+            }
+
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Exception: BuscaNombre");
+                return null;
+            }
+
+            
+            return MyCollection;
+            
+        }
+
         /////////////////
 
     }

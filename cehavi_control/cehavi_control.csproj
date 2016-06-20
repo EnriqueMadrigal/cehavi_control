@@ -56,10 +56,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="listageneral.xaml.cs">
+      <DependentUpon>listageneral.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Registro.cs" />
     <Page Include="editpaciente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="listageneral.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="listapacientes.xaml">
       <SubType>Designer</SubType>
