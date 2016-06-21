@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
+using System.Collections;
 
 namespace cehavi_control
 {
@@ -22,6 +23,7 @@ namespace cehavi_control
     {
 
         private Int32 curTerapia = 0;
+        private Int32 curPaciente = 0;
         public Terapia()
         {
             InitializeComponent();
@@ -39,6 +41,12 @@ namespace cehavi_control
         public void SetCurTerapia(Int32 newTerapia)
         {
             this.curTerapia = newTerapia;
+        }
+
+
+        public void SetCurPaciente (Int32 newPaciente)
+        {
+            this.curPaciente = newPaciente;
         }
 
         private void CargaDatos()
@@ -116,8 +124,10 @@ namespace cehavi_control
             this.comboBoxMinutos.ItemsSource = DatosMinutos.DefaultView;
             this.comboBoxMinutos.DisplayMemberPath = DatosMinutos.Columns["Minutos"].ToString();
             this.comboBoxMinutos.SelectedValuePath = DatosMinutos.Columns["IdMinutos"].ToString();
-
             this.comboBoxMinutos.SelectedValue = 0;
+
+         
+
 
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
@@ -129,7 +139,7 @@ namespace cehavi_control
             this.comboBoxTerapeutas.SelectedValuePath = DatosTerapuetas.Columns["Id"].ToString();
             this.comboBoxTerapeutas.SelectedValue = 1;
 
-
+            this.textBox.Text = "40";
 
 
         }
@@ -137,13 +147,57 @@ namespace cehavi_control
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
 
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+
+            ArrayList valores = new ArrayList();
+
+            Int32 Dia = System.Convert.ToInt32(this.comboBoxDias.SelectedValue);
+            Int32 Hora = System.Convert.ToInt32(this.comboBoxHoras.SelectedValue);
+            Int32 Duracion = System.Convert.ToInt32(this.textBox.Text);
+            Int32 Terapeuta = System.Convert.ToInt32(this.comboBoxTerapeutas.SelectedValue);
+            Int32 Minuto = System.Convert.ToInt32(this.comboBoxMinutos.SelectedValue);
+
+            valores.Add(new Registro("Dia", Dia));
+            valores.Add(new Registro("Hora", Hora));
+            valores.Add(new Registro("Minuto", Minuto));
+            valores.Add(new Registro("Duracion", Duracion));
+            valores.Add(new Registro("IdPaciente", this.curPaciente));
+            valores.Add(new Registro("IdTerapeuta", Terapeuta));
+
+            if (this.curTerapia != 0) datos1.UpdateData(valores, this.curTerapia, "Id", "terapias");
+            else datos1.InsertData(valores, "terapias");
+
+            this.Close();
+
+
+
+
+
         }
 
+
+        public void DeleteCurTerapia()
+        {
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+
+            datos1.executeQuery("delete from terapias where Id=" + this.curTerapia .ToString());
+
+
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filteredText = cehavi_control.TextFilters.GetNumber(cehavi_control.TextFilters.intPattern, this.textBox.Text);
+            cehavi_control.TextFilters.SetControlText((TextBox)sender, filteredText);
+
+        }
     }
 }

@@ -134,8 +134,9 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding IdTerapia}" Header="ID" Visibility="Hidden" />
                             <DataGridTextColumn Binding="{Binding Dia}" Header="Dia" />
+                            <DataGridTextColumn Binding="{Binding Hora}" Header="Hora" />
                             <DataGridTextColumn Binding="{Binding Duracion}" Header="Duracion" />
-                            <DataGridTextColumn Binding="{Binding Terapueta}" Header="Terapeuta" />
+                            <DataGridTextColumn Binding="{Binding Terapeuta}" Header="Terapeuta" />
 
                         </DataGrid.Columns>
 

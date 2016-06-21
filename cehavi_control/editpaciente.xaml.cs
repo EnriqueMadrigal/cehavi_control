@@ -47,6 +47,7 @@ namespace cehavi_control
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CargaDatos();
+            CargaTerapias();
 
         }
 
@@ -317,9 +318,18 @@ namespace cehavi_control
         private void button10_Click(object sender, RoutedEventArgs e)
         {
 
+            if (this.curPaciente == 0)
+            {
+                MessageBox.Show("Por favor primero, guarde el paciente y luego proceda a dar de alta las terapias", "Advertencia");
+                return;
+            }
+
             Terapia dlg1 = new Terapia();
+            dlg1.SetCurPaciente(this.curPaciente);
             dlg1.ShowDialog();
 
+            MessageBox.Show("Se agrego el registro", "Información");
+            CargaTerapias();
 
         }
 
@@ -331,6 +341,39 @@ namespace cehavi_control
         private void button12_Click(object sender, RoutedEventArgs e)
         {
 
+
+            DataGridCellInfo curcell = dataGrid.CurrentCell;
+
+            object item = dataGrid.SelectedItem;
+
+            if (item == null) return;
+            string ID = (dataGrid.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
+            //MessageBox.Show(ID);
+
+          
+
+            MessageBoxResult result = MessageBox.Show("Esta seguro que desea elimiar esta terapia", "Advertencia", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+            
+            if (result == MessageBoxResult.OK)
+            {
+
+                object curType = ((DataRowView) dataGrid.SelectedItem).Row[0];
+                string curObject = curType.GetType().ToString();
+
+                Int32 curId = (Int32)((DataRowView)dataGrid.SelectedItem).Row["IdTerapia"];
+
+                DatosCehavi datos1 = new DatosCehavi();
+                datos1.Connect();
+
+                datos1.executeQuery("delete from terapias where Id=" + curId.ToString());
+
+                MessageBox.Show("Se elimino el registro", "Información");
+
+                CargaTerapias();
+            }
+
+           
+
         }
 
         private void CargaTerapias()
@@ -341,21 +384,30 @@ namespace cehavi_control
             string[] Dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
 
 
-            DataTable TerapiasTemp = datos1.LoadData("select Id, Dia, Hora, Duracion, IdTerapeuta from terapias where IdPaciente=" + this.curPaciente);
+            DataTable TerapiasTemp = datos1.LoadData("select Id, Dia, Hora, Duracion, IdTerapeuta, Minuto from terapias where IdPaciente=" + this.curPaciente);
 
             this.DatosTerapias = new DataTable("Terapias");
+            this.DatosTerapias.Columns.Add("IdTerapia", Type.GetType("System.Int32"));
             this.DatosTerapias.Columns.Add("Dia", Type.GetType("System.String"));
-            this.DatosTerapias.Columns.Add("Duracion", Type.GetType("System.Int32"));
+            this.DatosTerapias.Columns.Add("Hora", Type.GetType("System.String"));
+            this.DatosTerapias.Columns.Add("Duracion", Type.GetType("System.Int16"));
             this.DatosTerapias.Columns.Add("Terapeuta", Type.GetType("System.String"));
 
 
             foreach (DataRow c in TerapiasTemp.Rows)
             {
-                Int32 Dia =  (Int32) c["Dia"];
-                Int32 Duracion = (Int32)c["Duracion"];
-                Int32 IdTerapueta = (Int32)c["IdTerapueta"];
+                string tipoA = c["Hora"].GetType().ToString();
+                Int32 IdTerapia = (Int32)c["Id"];
+                Int16 Dia =  (Int16) c["Dia"];
+                Int16 Duracion = (Int16)c["Duracion"];
+                Int16 IdTerapueta = (Int16)c["IdTerapeuta"];
+                Byte Hora = (Byte)c["Hora"];
+                Byte Minuto = (Byte)c["Minuto"];
 
-                this.DatosTerapias.Rows.Add(Dias[Dia - 1], Duracion, "Sin asignar");
+                string horario =  string.Format("{0:D2}", Hora) + ":" + string.Format("{0:D2}", Minuto);
+
+
+                this.DatosTerapias.Rows.Add(IdTerapia, Dias[Dia - 1], horario ,Duracion, "Sin asignar");
 
 
             }

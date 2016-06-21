@@ -13,8 +13,8 @@
         <ComboBox x:Name="comboBoxHoras" HorizontalAlignment="Left" Margin="56,57,0,0" VerticalAlignment="Top" Width="41"/>
         <Label x:Name="label2" Content=":" HorizontalAlignment="Left" Margin="101,57,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBoxMinutos" HorizontalAlignment="Left" Margin="118,57,0,0" VerticalAlignment="Top" Width="41"/>
-        <Label x:Name="label3" Content="Terapeuta:" HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBoxTerapeutas" HorizontalAlignment="Left" Margin="88,88,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label3" Content="Terapeuta:" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBoxTerapeutas" HorizontalAlignment="Left" Margin="88,126,0,0" VerticalAlignment="Top" Width="120"/>
 
 
         <Button x:Name="button1" Height="48" VerticalAlignment="Top" Width="48" Margin="-180,170,-48,0" Click="close_Click">
@@ -28,5 +28,7 @@
                 <Image Source="C:\Datos\res\bigcheck.png" />
             </Button.Content>
         </Button>
+        <Label x:Name="label4" Content="Duración:" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="88,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" TextChanged="textBox_TextChanged"/>
     </Grid>
 </Window>

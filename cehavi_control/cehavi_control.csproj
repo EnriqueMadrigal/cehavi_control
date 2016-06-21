@@ -63,6 +63,7 @@
     <Compile Include="Terapia.xaml.cs">
       <DependentUpon>Terapia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextFilters.cs" />
     <Page Include="editpaciente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
