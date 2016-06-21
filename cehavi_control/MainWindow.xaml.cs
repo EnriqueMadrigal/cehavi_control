@@ -75,6 +75,8 @@ namespace cehavi_control
 
         private void otraOpcion(object sender, RoutedEventArgs e)
         {
+            return;
+            
             /*
 
                 
@@ -129,18 +131,9 @@ namespace cehavi_control
   */
             DatosCehavi datos1 = new DatosCehavi();
            datos1.Connect();
-            datos1.executeQuery("insert into colonia(Nombre) values('La estancia')");
-            datos1.executeQuery("insert into colonia(Nombre) values('Chapalita')");
-            datos1.executeQuery("insert into colonia(Nombre) values('Chapalita de occidente')");
-            datos1.executeQuery("insert into colonia(Nombre) values('El Colli Urbano')");
-            datos1.executeQuery("insert into colonia(Nombre) values('La Calma')");
-            datos1.executeQuery("insert into colonia(Nombre) values('Chapultepec Country')");
-            datos1.executeQuery("insert into colonia(Nombre) values('Vallarta Poniente')");
-            datos1.executeQuery("insert into colonia(Nombre) values('Ciudad del Sol')");
-            datos1.executeQuery("insert into colonia(Nombre) values('Arboledas')");
-            datos1.executeQuery("insert into colonia(Nombre) values('Residencial Vallarta')");
-            datos1.executeQuery("insert into colonia(Nombre) values('Residencial Moctezuma')");
+            datos1.executeQuery("insert into Terapeutas(Nombre) values('sin asignar')");
 
+            
 
 
 

@@ -29,6 +29,7 @@ namespace cehavi_control
         private DataTable ComboEstado;
         private DataTable ComboEstadosRepublica;
 
+        private DataTable DatosTerapias;
 
         public editpaciente()
         {
@@ -313,8 +314,55 @@ namespace cehavi_control
         }
 
 
+        private void button10_Click(object sender, RoutedEventArgs e)
+        {
+
+            Terapia dlg1 = new Terapia();
+            dlg1.ShowDialog();
 
 
+        }
+
+        private void button11_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CargaTerapias()
+        {
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+
+            string[] Dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
+
+
+            DataTable TerapiasTemp = datos1.LoadData("select Id, Dia, Hora, Duracion, IdTerapeuta from terapias where IdPaciente=" + this.curPaciente);
+
+            this.DatosTerapias = new DataTable("Terapias");
+            this.DatosTerapias.Columns.Add("Dia", Type.GetType("System.String"));
+            this.DatosTerapias.Columns.Add("Duracion", Type.GetType("System.Int32"));
+            this.DatosTerapias.Columns.Add("Terapeuta", Type.GetType("System.String"));
+
+
+            foreach (DataRow c in TerapiasTemp.Rows)
+            {
+                Int32 Dia =  (Int32) c["Dia"];
+                Int32 Duracion = (Int32)c["Duracion"];
+                Int32 IdTerapueta = (Int32)c["IdTerapueta"];
+
+                this.DatosTerapias.Rows.Add(Dias[Dia - 1], Duracion, "Sin asignar");
+
+
+            }
+
+            this.dataGrid.ItemsSource = this.DatosTerapias.DefaultView;
+
+        }
 
 
     }
