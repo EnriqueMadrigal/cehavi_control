@@ -68,7 +68,7 @@ namespace cehavi_control
             this.comboBoxDias.DisplayMemberPath = DatosDia.Columns["Dia"].ToString();
             this.comboBoxDias.SelectedValuePath = DatosDia.Columns["IdDia"].ToString();
 
-            this.comboBoxDias.SelectedValue = 1;
+           
 
             DataTable DatosHora = new DataTable("Horas");
 
@@ -99,7 +99,7 @@ namespace cehavi_control
             this.comboBoxHoras.DisplayMemberPath = DatosHora.Columns["Hora"].ToString();
             this.comboBoxHoras.SelectedValuePath = DatosHora.Columns["IdHora"].ToString();
 
-            this.comboBoxHoras.SelectedValue = 9;
+           
 
             DataTable DatosMinutos = new DataTable("Minutos");
 
@@ -124,7 +124,7 @@ namespace cehavi_control
             this.comboBoxMinutos.ItemsSource = DatosMinutos.DefaultView;
             this.comboBoxMinutos.DisplayMemberPath = DatosMinutos.Columns["Minutos"].ToString();
             this.comboBoxMinutos.SelectedValuePath = DatosMinutos.Columns["IdMinutos"].ToString();
-            this.comboBoxMinutos.SelectedValue = 0;
+           
 
          
 
@@ -137,9 +137,43 @@ namespace cehavi_control
             this.comboBoxTerapeutas.ItemsSource = DatosTerapuetas.DefaultView;
             this.comboBoxTerapeutas.DisplayMemberPath = DatosTerapuetas.Columns["Nombre"].ToString();
             this.comboBoxTerapeutas.SelectedValuePath = DatosTerapuetas.Columns["Id"].ToString();
-            this.comboBoxTerapeutas.SelectedValue = 1;
 
-            this.textBox.Text = "40";
+
+
+            if (this.curTerapia == 0)
+            {
+                this.textBox.Text = "40";
+                this.comboBoxDias.SelectedValue = 1;
+                this.comboBoxHoras.SelectedValue = 9;
+                this.comboBoxMinutos.SelectedValue = 0;
+                this.comboBoxTerapeutas.SelectedValue = 1;
+            }
+
+
+            else
+            {
+
+                DataTable datosTerapia = datos1.LoadData("select dia, duracion, IdTerapeuta, Hora, Minuto from terapias where Id=" + this.curTerapia.ToString());
+
+                Int16 Dia = (Int16)datosTerapia.Rows[0]["Dia"];
+                Int16 Duracion = (Int16)datosTerapia.Rows[0]["Duracion"];
+                Int16 IdTerapueta = (Int16)datosTerapia.Rows[0]["IdTerapeuta"];
+                Byte Hora = (Byte)datosTerapia.Rows[0]["Hora"];
+                Byte Minuto = (Byte)datosTerapia.Rows[0]["Minuto"];
+
+                this.comboBoxDias.SelectedValue = Dia;
+                this.comboBoxHoras.SelectedValue = Hora;
+                this.comboBoxMinutos.SelectedValue = Minuto;
+                this.comboBoxTerapeutas.SelectedValue = IdTerapueta;
+                this.textBox.Text = Duracion.ToString();
+
+
+            }
+
+
+
+
+
 
 
         }
@@ -176,19 +210,13 @@ namespace cehavi_control
 
             this.Close();
 
-
-
-
-
+            
         }
 
-
-        public void DeleteCurTerapia()
+        private void GetFecha_Click(object sender, RoutedEventArgs e)
         {
-            DatosCehavi datos1 = new DatosCehavi();
-            datos1.Connect();
-
-            datos1.executeQuery("delete from terapias where Id=" + this.curTerapia .ToString());
+            Calendar1 dlg1 = new Calendar1();
+            dlg1.ShowDialog();
 
 
         }

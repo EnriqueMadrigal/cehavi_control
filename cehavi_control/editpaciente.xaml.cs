@@ -194,12 +194,25 @@ namespace cehavi_control
 
         private void cargaPaciente(object sender, RoutedEventArgs e)
         {
-            listapacientes dlg1 = new listapacientes();
-            dlg1.ShowDialog();
-            int newPaciente = dlg1.curPaciente;
-
-            if (newPaciente != 0)   CargaDatos();
             
+            listageneral dlg1 = new listageneral();
+            dlg1.setIndexName("IdPaciente");
+            dlg1.setNameIndex("Nombre");
+            dlg1.setTable("pacientes");
+
+            dlg1.ShowDialog();
+            
+            int newPaciente = dlg1.curId;
+
+
+
+            if (newPaciente != 0)   
+            {
+                this.curPaciente = newPaciente;
+                CargaDatos();
+                CargaTerapias();
+            }
+
         }
 
         private void guardaPaciente(object sender, RoutedEventArgs e)
@@ -328,13 +341,33 @@ namespace cehavi_control
             dlg1.SetCurPaciente(this.curPaciente);
             dlg1.ShowDialog();
 
-            MessageBox.Show("Se agrego el registro", "Información");
+            MessageBox.Show("Operación realizada", "Información");
             CargaTerapias();
 
         }
 
         private void button11_Click(object sender, RoutedEventArgs e)
         {
+
+            DataGridCellInfo curcell = dataGrid.CurrentCell;
+
+            object item = dataGrid.SelectedItem;
+
+            if (item == null) return;
+
+            object curType = ((DataRowView)dataGrid.SelectedItem).Row[0];
+            // string curObject = curType.GetType().ToString();
+
+            Int32 curId = (Int32)((DataRowView)dataGrid.SelectedItem).Row["IdTerapia"];
+            Terapia dlg1 = new Terapia();
+            dlg1.SetCurPaciente(this.curPaciente);
+            dlg1.SetCurTerapia(curId);
+            dlg1.ShowDialog();
+
+            MessageBox.Show("Operación realizada", "Información");
+            CargaTerapias();
+
+
 
         }
 
@@ -358,7 +391,7 @@ namespace cehavi_control
             {
 
                 object curType = ((DataRowView) dataGrid.SelectedItem).Row[0];
-                string curObject = curType.GetType().ToString();
+               // string curObject = curType.GetType().ToString();
 
                 Int32 curId = (Int32)((DataRowView)dataGrid.SelectedItem).Row["IdTerapia"];
 

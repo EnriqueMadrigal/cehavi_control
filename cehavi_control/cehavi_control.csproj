@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Calendar1.xaml.cs">
+      <DependentUpon>Calendar1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="listageneral.xaml.cs">
       <DependentUpon>listageneral.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,10 @@
       <DependentUpon>Terapia.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextFilters.cs" />
+    <Page Include="Calendar1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="editpaciente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

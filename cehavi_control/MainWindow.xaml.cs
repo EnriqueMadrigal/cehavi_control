@@ -46,9 +46,25 @@ namespace cehavi_control
         private void muestraPaciente(object sender, RoutedEventArgs e)
         {
             int curPaciente = 0;
+
+            /*
             listapacientes dlg1 = new listapacientes();
             dlg1.ShowDialog();
             curPaciente = dlg1.curPaciente;
+            */
+
+            listageneral dlg1 = new listageneral();
+            dlg1.setIndexName("IdPaciente");
+            dlg1.setNameIndex("Nombre");
+            dlg1.setTable("pacientes");
+
+            dlg1.ShowDialog();
+            curPaciente = dlg1.curId;
+
+            
+
+
+
 
             if (curPaciente == 0) return;
 

@@ -30,5 +30,13 @@
         </Button>
         <Label x:Name="label4" Content="Duración:" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="88,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" TextChanged="textBox_TextChanged"/>
+
+        <Button x:Name="button3" Height="32" VerticalAlignment="Top" Width="32" Margin="100,20,-48,0" Click="GetFecha_Click">
+            <Button.Content>
+                <Image Source="C:\Datos\res\bigcheck.png" />
+            </Button.Content>
+        </Button>
+
+
     </Grid>
 </Window>
