@@ -339,6 +339,7 @@ namespace cehavi_control
 
             Terapia dlg1 = new Terapia();
             dlg1.SetCurPaciente(this.curPaciente);
+            dlg1.NombrePaciente = this.NombrePaciente.Text;
             dlg1.ShowDialog();
 
             MessageBox.Show("Operación realizada", "Información");

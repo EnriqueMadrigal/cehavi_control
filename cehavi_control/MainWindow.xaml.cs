@@ -147,9 +147,10 @@ namespace cehavi_control
   */
             DatosCehavi datos1 = new DatosCehavi();
            datos1.Connect();
-            datos1.executeQuery("insert into Terapeutas(Nombre) values('sin asignar')");
+            datos1.executeQuery("insert into repeticion(Nombre) values('Semanal')");
+            datos1.executeQuery("insert into repeticion(Nombre) values('Mensual')");
+            datos1.executeQuery("insert into repeticion(Nombre) values('Una sola vez')");
 
-            
 
 
 
@@ -162,3 +163,4 @@ namespace cehavi_control
 
     }
 }
+

@@ -19,6 +19,50 @@ namespace cehavi_control
     /// </summary>
     public partial class Calendar1 : Window
     {
+
+        private string nombrePaciente = "";
+        private string curValue = "";
+        private Int32 duracion;
+
+        public string NombrePaciente
+        {
+            get
+            {
+                return nombrePaciente;
+            }
+
+            set
+            {
+                nombrePaciente = value;
+            }
+        }
+
+        public string CurValue
+        {
+            get
+            {
+                return curValue;
+            }
+
+            set
+            {
+                curValue = value;
+            }
+        }
+
+        public int Duracion
+        {
+            get
+            {
+                return duracion;
+            }
+
+            set
+            {
+                duracion = value;
+            }
+        }
+
         public Calendar1()
         {
             InitializeComponent();
@@ -29,7 +73,37 @@ namespace cehavi_control
 
 
             this.webBrowser1.Navigate("E:\\wamp\\www\\nailsalon\\testcalendar.html");
+            
+         
 
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            mshtml.HTMLDocument document = (mshtml.HTMLDocument)webBrowser1.Document;
+            mshtml.IHTMLElement textArea = document.getElementById("curDate");
+            //MessageBox.Show(textArea.innerHTML, "Contenido");
+            this.curValue = textArea.innerHTML;
+            this.Close();
+
+        }
+
+        private void SetHtmlValues()
+        {
+
+            mshtml.HTMLDocument document = (mshtml.HTMLDocument)webBrowser1.Document;
+            mshtml.IHTMLElement textArea1 = document.getElementById("PacientName");
+            mshtml.IHTMLElement textArea2 = document.getElementById("EventDuration");
+
+            textArea1.innerHTML = nombrePaciente;
+            textArea2.innerHTML = duracion.ToString();
+            
+        }
+
+        private void webBrowser1_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+             SetHtmlValues();
+            
         }
     }
 }

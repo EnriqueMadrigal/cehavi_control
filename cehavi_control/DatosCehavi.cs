@@ -535,6 +535,54 @@ namespace cehavi_control
             
         }
 
+
+
+        public void CargaComboBoxData(System.Windows.Controls.ComboBox comboBox, string tableString)
+        {
+
+            /*
+             
+            DataTable DatosTerapuetas = datos1.LoadData("select Id, Nombre from terapeutas order by Nombre");
+
+            this.comboBoxTerapeutas.ItemsSource = DatosTerapuetas.DefaultView;
+            this.comboBoxTerapeutas.DisplayMemberPath = DatosTerapuetas.Columns["Nombre"].ToString();
+            this.comboBoxTerapeutas.SelectedValuePath = DatosTerapuetas.Columns["Id"].ToString();
+             * * 
+             * */
+
+            try
+            {
+                DataTable ds = new DataTable("Nombres");
+                OleDbCommand com = new OleDbCommand();
+
+                com.Connection = GetConnection();
+                com.CommandText = tableString;
+                OleDbDataAdapter adapt = new OleDbDataAdapter();
+                adapt.SelectCommand = com;
+                adapt.Fill(ds);
+                //this.curConnection.Close();
+                
+                comboBox.ItemsSource = ds.DefaultView;
+                comboBox.DisplayMemberPath = ds.Columns[1].ToString();
+                comboBox.SelectedValuePath = ds.Columns[0].ToString();
+
+
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Exception: LoadData");
+                return;
+            }
+
+
+
+
+            return;
+
+        }
+
+
         /////////////////
 
     }
