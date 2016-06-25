@@ -243,7 +243,7 @@ namespace cehavi_control
 
 
 
-            //MessageBox.Show(query, "Query");
+            MessageBox.Show(query, "Query");
 
        
 

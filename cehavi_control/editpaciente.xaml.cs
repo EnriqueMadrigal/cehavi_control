@@ -80,7 +80,7 @@ namespace cehavi_control
             this.comboBox4.DisplayMemberPath = ComboEstadosRepublica.Columns[1].ToString();
             this.comboBox4.SelectedValuePath = ComboEstadosRepublica.Columns[0].ToString();
 
-            
+
             if (this.curPaciente != 0)
             {
                 this.DatosPaciente = datos1.LoadData("select Nombre,Comentarios,Sexo,IdEscuela,IdGradoEscuela, Datepart('yyyy',FechaNac),DatePart('m',FechaNac),Datepart('d',FechaNac),estatus, calle, exterior, interior,cp,telefonocasa,telefonorecados,telefonocel,idciudad,idmunicipio,idcolonia, idestado, email from pacientes where IdPaciente=" + this.curPaciente.ToString());
@@ -177,7 +177,7 @@ namespace cehavi_control
         {
             this.Close();
         }
-       
+
 
         private void borraPaciente(object sender, RoutedEventArgs e)
         {
@@ -194,19 +194,19 @@ namespace cehavi_control
 
         private void cargaPaciente(object sender, RoutedEventArgs e)
         {
-            
+
             listageneral dlg1 = new listageneral();
             dlg1.setIndexName("IdPaciente");
             dlg1.setNameIndex("Nombre");
             dlg1.setTable("pacientes");
 
             dlg1.ShowDialog();
-            
+
             int newPaciente = dlg1.curId;
 
 
 
-            if (newPaciente != 0)   
+            if (newPaciente != 0)
             {
                 this.curPaciente = newPaciente;
                 CargaDatos();
@@ -227,9 +227,9 @@ namespace cehavi_control
 
             string NombrePaciente = this.NombrePaciente.Text;
 
-            if (NombrePaciente.Length <5)
+            if (NombrePaciente.Length < 5)
             {
-                MessageBox.Show("El nombre es invalido","Advertencia:");
+                MessageBox.Show("El nombre es invalido", "Advertencia:");
                 return;
             }
 
@@ -239,39 +239,39 @@ namespace cehavi_control
             valores.Add(new Registro("IdGradoEscuela", this.comboBox1.SelectedValue));
             valores.Add(new Registro("IdEscuela", this.comboBox2.SelectedValue));
             valores.Add(new Registro("terapias", 1));
-         
+
             valores.Add(new Registro("estatus", this.comboBox3.SelectedValue));
             valores.Add(new Registro("calle", this.Calle.Text));
             valores.Add(new Registro("cp", this.CodigoPostal.Text));
-            
+
             valores.Add(new Registro("exterior", this.exterior.Text));
             valores.Add(new Registro("interior", this.interior.Text));
-           
+
             valores.Add(new Registro("telefonocasa", this.telefonocasa.Text));
             valores.Add(new Registro("telefonocel", this.telefonomovil.Text));
-         
+
             valores.Add(new Registro("telefonorecados", this.telefonorecados.Text));
             valores.Add(new Registro("email", this.email.Text));
 
 
             Int32 CurCiudad = datos1.BuscaNombreTabla(this.Ciudad.Text, "Ciudad", "Id", "Nombre");
-      if (CurCiudad == 0) CurCiudad = datos1.InsertaNombreCampo(this.Ciudad.Text, "Ciudad", "Nombre");
+            if (CurCiudad == 0) CurCiudad = datos1.InsertaNombreCampo(this.Ciudad.Text, "Ciudad", "Nombre");
 
-      Int32 CurMunicipio = datos1.BuscaNombreTabla(this.Municipio.Text, "Municipio", "Id", "Nombre");
-      if (CurMunicipio == 0) CurMunicipio = datos1.InsertaNombreCampo(this.Ciudad.Text, "Municipio", "Nombre");
+            Int32 CurMunicipio = datos1.BuscaNombreTabla(this.Municipio.Text, "Municipio", "Id", "Nombre");
+            if (CurMunicipio == 0) CurMunicipio = datos1.InsertaNombreCampo(this.Ciudad.Text, "Municipio", "Nombre");
 
-      Int32 CurColonia = datos1.BuscaNombreTabla(this.Colonia.Text, "Colonia", "Id", "Nombre");
-      if (CurColonia == 0) CurColonia = datos1.InsertaNombreCampo(this.Colonia.Text, "Colonia", "Nombre");
+            Int32 CurColonia = datos1.BuscaNombreTabla(this.Colonia.Text, "Colonia", "Id", "Nombre");
+            if (CurColonia == 0) CurColonia = datos1.InsertaNombreCampo(this.Colonia.Text, "Colonia", "Nombre");
 
 
-      valores.Add(new Registro("idciudad", CurCiudad));
-      valores.Add(new Registro("idmunicipio", CurMunicipio));
-      valores.Add(new Registro("idcolonia", CurColonia));
+            valores.Add(new Registro("idciudad", CurCiudad));
+            valores.Add(new Registro("idmunicipio", CurMunicipio));
+            valores.Add(new Registro("idcolonia", CurColonia));
 
-  
+
 
             if (this.curPaciente != 0) datos1.UpdateData(valores, this.curPaciente, "IdPaciente", "pacientes");
-            else datos1.InsertData(valores,"pacientes");
+            else datos1.InsertData(valores, "pacientes");
 
 
             this.Close();
@@ -293,7 +293,7 @@ namespace cehavi_control
 
             this.Colonia.Text = dlg1.curValue;
 
-            
+
         }
 
 
@@ -384,15 +384,15 @@ namespace cehavi_control
             string ID = (dataGrid.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
             //MessageBox.Show(ID);
 
-          
+
 
             MessageBoxResult result = MessageBox.Show("Esta seguro que desea elimiar esta terapia", "Advertencia", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
-            
+
             if (result == MessageBoxResult.OK)
             {
 
-                object curType = ((DataRowView) dataGrid.SelectedItem).Row[0];
-               // string curObject = curType.GetType().ToString();
+                object curType = ((DataRowView)dataGrid.SelectedItem).Row[0];
+                // string curObject = curType.GetType().ToString();
 
                 Int32 curId = (Int32)((DataRowView)dataGrid.SelectedItem).Row["IdTerapia"];
 
@@ -406,7 +406,7 @@ namespace cehavi_control
                 CargaTerapias();
             }
 
-           
+
 
         }
 
@@ -418,30 +418,37 @@ namespace cehavi_control
             string[] Dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
 
 
-            DataTable TerapiasTemp = datos1.LoadData("select Id, Dia, Hora, Duracion, IdTerapeuta, Minuto from terapias where IdPaciente=" + this.curPaciente);
+            DataTable TerapiasTemp = datos1.LoadData("select Id, Fecha, Duracion, IdTerapeuta, Periodo from terapias where IdPaciente=" + this.curPaciente);
+            if (TerapiasTemp == null) return;
 
             this.DatosTerapias = new DataTable("Terapias");
             this.DatosTerapias.Columns.Add("IdTerapia", Type.GetType("System.Int32"));
+            this.DatosTerapias.Columns.Add("Inicio", Type.GetType("System.String"));
             this.DatosTerapias.Columns.Add("Dia", Type.GetType("System.String"));
             this.DatosTerapias.Columns.Add("Hora", Type.GetType("System.String"));
             this.DatosTerapias.Columns.Add("Duracion", Type.GetType("System.Int16"));
+            this.DatosTerapias.Columns.Add("Periodo", Type.GetType("System.String"));
             this.DatosTerapias.Columns.Add("Terapeuta", Type.GetType("System.String"));
 
 
             foreach (DataRow c in TerapiasTemp.Rows)
             {
-                string tipoA = c["Hora"].GetType().ToString();
+                string tipoA = c["Fecha"].GetType().ToString();
                 Int32 IdTerapia = (Int32)c["Id"];
-                Int16 Dia =  (Int16) c["Dia"];
-                Int16 Duracion = (Int16)c["Duracion"];
                 Int16 IdTerapueta = (Int16)c["IdTerapeuta"];
-                Byte Hora = (Byte)c["Hora"];
-                Byte Minuto = (Byte)c["Minuto"];
+                DateTime curFecha = (DateTime)c["Fecha"];
+                Int16 Periodo = (Int16)c["Periodo"];
+                Int16 Duracion = (Int16)c["Duracion"];
 
-                string horario =  string.Format("{0:D2}", Hora) + ":" + string.Format("{0:D2}", Minuto);
+                int CurDia = (int)curFecha.DayOfWeek;
+                string NombreTerapeuta = datos1.GetNombreTabla(IdTerapueta, "Terapeutas", "Id", "Nombre");
+                string NombrePeriodo = datos1.GetNombreTabla(Periodo, "repeticion", "Id", "Nombre");
 
 
-                this.DatosTerapias.Rows.Add(IdTerapia, Dias[Dia - 1], horario ,Duracion, "Sin asignar");
+                //  string horario =  string.Format("{0:D2}", Hora) + ":" + string.Format("{0:D2}", Minuto);
+
+
+                this.DatosTerapias.Rows.Add(IdTerapia,curFecha.ToShortDateString() ,Dias[CurDia], curFecha.ToShortTimeString(), Duracion.ToString() ,NombrePeriodo, NombreTerapeuta);
 
 
             }

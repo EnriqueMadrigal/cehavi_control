@@ -67,26 +67,23 @@ namespace cehavi_control
         private void CargaDatos()
         {
            
-           
-
-      
-
-            DatosCehavi datos1 = new DatosCehavi();
+             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
 
+            datos1.CargaComboBoxData(this.comboBoxTerapeutas, "select Id,Nombre from terapeutas order by Nombre");
+            /*
             DataTable DatosTerapuetas = datos1.LoadData("select Id, Nombre from terapeutas order by Nombre");
-
             this.comboBoxTerapeutas.ItemsSource = DatosTerapuetas.DefaultView;
             this.comboBoxTerapeutas.DisplayMemberPath = DatosTerapuetas.Columns["Nombre"].ToString();
             this.comboBoxTerapeutas.SelectedValuePath = DatosTerapuetas.Columns["Id"].ToString();
-
+            */
 
             datos1.CargaComboBoxData(this.Repeticion, "select Id,Nombre from repeticion");
             
 
             if (this.curTerapia == 0)
             {
-                this.textBox.Text = "40";
+                this.textBox.Text = "45";
                 this.Repeticion.SelectedValue = 1;
 
                 this.comboBoxTerapeutas.SelectedValue = 1;
@@ -96,19 +93,21 @@ namespace cehavi_control
             else
             {
 
-                DataTable datosTerapia = datos1.LoadData("select dia, duracion, IdTerapeuta, Hora, Minuto from terapias where Id=" + this.curTerapia.ToString());
+                DataTable datosTerapia = datos1.LoadData("select Fecha, Duracion, IdTerapeuta, Periodo from terapias where Id=" + this.curTerapia.ToString());
 
                // Int16 Dia = (Int16)datosTerapia.Rows[0]["Dia"];
                 Int16 Duracion = (Int16)datosTerapia.Rows[0]["Duracion"];
                 Int16 IdTerapueta = (Int16)datosTerapia.Rows[0]["IdTerapeuta"];
-               // Byte Hora = (Byte)datosTerapia.Rows[0]["Hora"];
-               // Byte Minuto = (Byte)datosTerapia.Rows[0]["Minuto"];
+                Int16 Periodo = (Int16)datosTerapia.Rows[0]["Periodo"];
+                // Byte Hora = (Byte)datosTerapia.Rows[0]["Hora"];
+                // Byte Minuto = (Byte)datosTerapia.Rows[0]["Minuto"];
+                DateTime curFecha = (DateTime)datosTerapia.Rows[0]["Fecha"];
 
-              
+                this.Repeticion.SelectedValue = Periodo; 
                 this.comboBoxTerapeutas.SelectedValue = IdTerapueta;
                 this.textBox.Text = Duracion.ToString();
                 this.Repeticion.SelectedValue = 1;
-
+                this.Fecha.Text = curFecha.ToShortDateString() + ":" + curFecha.ToShortTimeString();
             }
 
 
@@ -133,18 +132,34 @@ namespace cehavi_control
 
             ArrayList valores = new ArrayList();
 
+            if (this.Fecha.Text.Length==0)
+            {
+                MessageBox.Show("Selecciona una fecha", "Advertencia");
+                return;
+            }
+
+            DateTime curFecha = System.Convert.ToDateTime(this.Fecha.Text);
+
           //  Int32 Dia = System.Convert.ToInt32(this.comboBoxDias.SelectedValue);
           //  Int32 Hora = System.Convert.ToInt32(this.comboBoxHoras.SelectedValue);
             Int32 Duracion = System.Convert.ToInt32(this.textBox.Text);
             Int32 Terapeuta = System.Convert.ToInt32(this.comboBoxTerapeutas.SelectedValue);
-          //  Int32 Minuto = System.Convert.ToInt32(this.comboBoxMinutos.SelectedValue);
+            Int32 Periodo = System.Convert.ToInt32(this.Repeticion.SelectedValue);
+
+            //  Int32 Minuto = System.Convert.ToInt32(this.comboBoxMinutos.SelectedValue);
 
             valores.Add(new Registro("Duracion", Duracion));
             valores.Add(new Registro("IdPaciente", this.curPaciente));
             valores.Add(new Registro("IdTerapeuta", Terapeuta));
+            valores.Add(new Registro("Periodo", Periodo));
+            valores.Add(new Registro("Fecha", curFecha.ToString("yyyy-MM-dd HH:mm:ss")));
 
             if (this.curTerapia != 0) datos1.UpdateData(valores, this.curTerapia, "Id", "terapias");
             else datos1.InsertData(valores, "terapias");
+
+
+            //MessageBox.Show(curFecha.ToShortDateString(),"Fecha");
+            //MessageBox.Show(curFecha.ToShortTimeString(), "Hora");
 
             this.Close();
 

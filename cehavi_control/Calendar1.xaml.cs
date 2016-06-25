@@ -85,6 +85,7 @@ namespace cehavi_control
             //MessageBox.Show(textArea.innerHTML, "Contenido");
             this.curValue = textArea.innerHTML;
             this.Close();
+          
 
         }
 
@@ -105,5 +106,27 @@ namespace cehavi_control
              SetHtmlValues();
             
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            this.webBrowser1.InvokeScript("Testfunction");
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            this.webBrowser1.InvokeScript("Testfunction1");
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            this.webBrowser1.InvokeScript("Testfunction2");
+        }
+
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            this.webBrowser1.InvokeScript("Testfunction3");
+        }
+
+
     }
 }

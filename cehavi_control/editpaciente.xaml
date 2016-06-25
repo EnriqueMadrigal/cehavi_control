@@ -133,9 +133,11 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding IdTerapia}" Header="ID" Visibility="Hidden" />
+                            <DataGridTextColumn Binding="{Binding Inicio}" Header="Inicio" />
                             <DataGridTextColumn Binding="{Binding Dia}" Header="Dia" />
                             <DataGridTextColumn Binding="{Binding Hora}" Header="Hora" />
                             <DataGridTextColumn Binding="{Binding Duracion}" Header="Duracion" />
+                            <DataGridTextColumn Binding="{Binding Periodo}" Header="Periodo" />
                             <DataGridTextColumn Binding="{Binding Terapeuta}" Header="Terapeuta" />
 
                         </DataGrid.Columns>
@@ -157,7 +159,7 @@
 
                     <Button x:Name="button12" Height="48" VerticalAlignment="Top" Width="48" Click="button12_Click" Margin="220,170,-48,0">
                         <Button.Content>
-                            <Image Source="C:\Datos\res\stop.png" />
+                            <Image Source="C:\Datos\res\trash.png" />
                         </Button.Content>
                     </Button>
 
