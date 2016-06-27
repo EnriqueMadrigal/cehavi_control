@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace cehavi_control
 {
@@ -28,7 +29,17 @@ namespace cehavi_control
         {
 
 
-            this.webBrowser1.Navigate("E:\\wamp\\www\\nailsalon\\testcalendar.html");
+            this.webBrowser1.Navigate("c:\\Datos\\web\\testcalendar.html");
+
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+            mshtml.HTMLDocument document = (mshtml.HTMLDocument)webBrowser1.Document;
+            mshtml.IHTMLElement textArea = document.getElementById("curDate");
+            MessageBox.Show(textArea.innerHTML, "Contenido");
+
 
         }
     }

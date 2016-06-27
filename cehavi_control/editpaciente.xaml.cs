@@ -411,6 +411,8 @@ namespace cehavi_control
 
         private void CargaTerapias()
         {
+
+            return;
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
 
