@@ -5,38 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cehavi_control"
         mc:Ignorable="d"
-        Title="Terapia" Height="300" Width="300" Loaded="Window_Loaded">
+        Title="Terapia" Height="395.333" Width="300" Loaded="Window_Loaded">
     <Grid>
         <Label x:Name="label" Content="Dia" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Repetición:" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="Terapeuta:" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBoxTerapeutas" HorizontalAlignment="Left" Margin="88,161,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label1" Content="Repetición:" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="Terapeuta:" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBoxTerapeutas" HorizontalAlignment="Left" Margin="88,196,0,0" VerticalAlignment="Top" Width="120"/>
 
 
-        <Button x:Name="button1" Height="48" VerticalAlignment="Top" Width="48" Margin="52,200,192,0" Click="close_Click">
+        <Button x:Name="button1" Height="48" VerticalAlignment="Top" Width="48" Margin="52,241,192,0" Click="close_Click">
             <Button.Content>
                 <Image Source="C:\Datos\res\stop.png" />
             </Button.Content>
         </Button>
 
-        <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Margin="197,200,47,0" Click="save_Click">
+        <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Margin="197,241,47,0" Click="save_Click">
             <Button.Content>
                 <Image Source="C:\Datos\res\bigcheck.png" />
             </Button.Content>
         </Button>
-        <Label x:Name="label4" Content="Duración:" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="88,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" TextChanged="textBox_TextChanged"/>
+        <Label x:Name="label4" Content="Duración:" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="88,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" TextChanged="textBox_TextChanged"/>
 
-        <Button x:Name="button3" Height="32" VerticalAlignment="Top" Width="32" Margin="100,20,-48,0" Click="GetFecha_Click">
+        <Button x:Name="button3" Height="32" VerticalAlignment="Top" Width="32" Margin="219,20,41,0" Click="GetFecha_Click">
             <Button.Content>
                 <Image Source="C:\Datos\res\calicon.png" />
             </Button.Content>
         </Button>
-        <TextBox x:Name="Fecha" HorizontalAlignment="Left" Height="23" Margin="42,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <ComboBox x:Name="Repeticion" HorizontalAlignment="Left" Margin="88,63,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label2" Content="Min." HorizontalAlignment="Left" Margin="136,126,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label5" Content="Hasta:" HorizontalAlignment="Left" Margin="37,93,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="datePicker1" HorizontalAlignment="Left" Margin="88,95,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Fecha" HorizontalAlignment="Left" Height="23" Margin="42,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" IsEnabled="False"/>
+        <ComboBox x:Name="Repeticion" HorizontalAlignment="Left" Margin="88,133,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label2" Content="Min." HorizontalAlignment="Left" Margin="136,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label5" Content="Hasta:" HorizontalAlignment="Left" Margin="37,94,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePicker1" HorizontalAlignment="Left" Margin="88,96,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label5_Copy" Content="Inicia:" HorizontalAlignment="Left" Margin="37,62,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePicker0" HorizontalAlignment="Left" Margin="88,64,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label6" Content="Hora:" HorizontalAlignment="Left" Margin="95,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.132,-0.064"/>
+        <TextBox x:Name="Hora" HorizontalAlignment="Left" Height="23" Margin="135,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" IsEnabled="False"/>
 
 
     </Grid>

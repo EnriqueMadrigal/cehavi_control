@@ -413,14 +413,14 @@ namespace cehavi_control
         private void CargaTerapias()
         {
 
-            //return;
+          //return;
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
 
-            string[] Dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
+            string[] Dias = { "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
 
 
-            DataTable TerapiasTemp = datos1.LoadData("select Id, Fecha, Duracion, IdTerapeuta, Periodo from terapias where IdPaciente=" + this.curPaciente);
+            DataTable TerapiasTemp = datos1.LoadData("select Id, Fecha, Fecha2,Dia, Hora, Duracion, IdTerapeuta, Periodo from terapias where IdPaciente=" + this.curPaciente);
             if (TerapiasTemp == null) return;
 
             this.DatosTerapias = new DataTable("Terapias");
@@ -431,7 +431,7 @@ namespace cehavi_control
             this.DatosTerapias.Columns.Add("Duracion", Type.GetType("System.Int16"));
             this.DatosTerapias.Columns.Add("Periodo", Type.GetType("System.String"));
             this.DatosTerapias.Columns.Add("Terapeuta", Type.GetType("System.String"));
-
+            this.DatosTerapias.Columns.Add("Fin", Type.GetType("System.String"));
 
             foreach (DataRow c in TerapiasTemp.Rows)
             {
@@ -439,11 +439,16 @@ namespace cehavi_control
                 string tipoA = c["Fecha"].GetType().ToString();
                 Int32 IdTerapia = (Int32)c["Id"];
                 Int16 IdTerapueta = (Int16)c["IdTerapeuta"];
-                DateTime curFecha = (DateTime)c["Fecha"];
+                DateTime startFecha = (DateTime)c["Fecha"];
+                DateTime endFecha = (DateTime)c["Fecha2"];
+                DateTime Hora = (DateTime)c["Hora"];
+
                 Int16 Periodo = (Int16)c["Periodo"];
                 Int16 Duracion = (Int16)c["Duracion"];
+                Byte curDia = (Byte)c["Dia"];
 
-                int CurDia = (int)curFecha.DayOfWeek;
+
+               
                 string NombreTerapeuta = datos1.GetNombreTabla(IdTerapueta, "Terapeutas", "Id", "Nombre");
                 string NombrePeriodo = datos1.GetNombreTabla(Periodo, "repeticion", "Id", "Nombre");
 
@@ -451,7 +456,7 @@ namespace cehavi_control
                 //  string horario =  string.Format("{0:D2}", Hora) + ":" + string.Format("{0:D2}", Minuto);
 
 
-                this.DatosTerapias.Rows.Add(IdTerapia,curFecha.ToShortDateString() ,Dias[CurDia], curFecha.ToShortTimeString(), Duracion.ToString() ,NombrePeriodo, NombreTerapeuta);
+                this.DatosTerapias.Rows.Add(IdTerapia,startFecha.ToShortDateString() ,Dias[curDia], Hora.ToShortTimeString(), Duracion.ToString() ,NombrePeriodo, NombreTerapeuta, endFecha.ToShortDateString());
 
 
             }

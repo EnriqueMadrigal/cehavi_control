@@ -25,6 +25,7 @@ namespace cehavi_control
         private Int32 curTerapia = 0;
         private Int32 curPaciente = 0;
         private string nombrePaciente = "";
+        private string TerapiaFecha = "";
 
         public string NombrePaciente
         {
@@ -66,8 +67,9 @@ namespace cehavi_control
 
         private void CargaDatos()
         {
-           
-             DatosCehavi datos1 = new DatosCehavi();
+            string[] Dias = { "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+
+            DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
 
             datos1.CargaComboBoxData(this.comboBoxTerapeutas, "select Id,Nombre from terapeutas order by Nombre");
@@ -93,24 +95,29 @@ namespace cehavi_control
             else
             {
 
-                DataTable datosTerapia = datos1.LoadData("select Fecha, Duracion, IdTerapeuta, Fecha2, Periodo from terapias where Id=" + this.curTerapia.ToString());
-                 // Int16 Dia = (Int16)datosTerapia.Rows[0]["Dia"];
+                DataTable datosTerapia = datos1.LoadData("select Fecha, Duracion, IdTerapeuta, Fecha2, Dia, Hora, Periodo from terapias where Id=" + this.curTerapia.ToString());
+                  Byte Dia = (Byte)datosTerapia.Rows[0]["Dia"];
                     Int16 Duracion = (Int16)datosTerapia.Rows[0]["Duracion"];
                     Int16 IdTerapueta = (Int16)datosTerapia.Rows[0]["IdTerapeuta"];
                     Int16 Periodo = (Int16)datosTerapia.Rows[0]["Periodo"];
                     // Byte Hora = (Byte)datosTerapia.Rows[0]["Hora"];
                     // Byte Minuto = (Byte)datosTerapia.Rows[0]["Minuto"];
                     DateTime curFecha = (DateTime)datosTerapia.Rows[0]["Fecha"];
-                   DateTime endFecha = (DateTime)datosTerapia.Rows[0]["Fecha2"];
-              
-            
+                    DateTime endFecha = (DateTime)datosTerapia.Rows[0]["Fecha2"];
+                    DateTime Hora = (DateTime)datosTerapia.Rows[0]["Hora"];
+
+
+
 
 
                 this.Repeticion.SelectedValue = Periodo; 
                 this.comboBoxTerapeutas.SelectedValue = IdTerapueta;
                 this.textBox.Text = Duracion.ToString();
                 this.Repeticion.SelectedValue = 1;
-                this.Fecha.Text = curFecha.ToString("yyyy-MM-dd HH:mm:ss");
+                this.Fecha.Text = Dias[Dia];
+                this.Hora.Text = Hora.ToShortTimeString();
+                //this.Fecha.Text = curFecha.ToString("yyyy-MM-dd HH:mm:ss");
+                this.datePicker0.SelectedDate = curFecha;
                 this.datePicker1.SelectedDate = endFecha;
             }
 
@@ -136,29 +143,35 @@ namespace cehavi_control
 
             ArrayList valores = new ArrayList();
 
-            if (this.Fecha.Text.Length==0)
+            if (this.TerapiaFecha.Length==0)
             {
                 MessageBox.Show("Selecciona una fecha", "Advertencia");
                 return;
             }
 
-            DateTime curFecha = System.Convert.ToDateTime(this.Fecha.Text);
+            DateTime curFecha = System.Convert.ToDateTime(this.TerapiaFecha);
 
           //  Int32 Dia = System.Convert.ToInt32(this.comboBoxDias.SelectedValue);
           //  Int32 Hora = System.Convert.ToInt32(this.comboBoxHoras.SelectedValue);
             Int32 Duracion = System.Convert.ToInt32(this.textBox.Text);
             Int32 Terapeuta = System.Convert.ToInt32(this.comboBoxTerapeutas.SelectedValue);
             Int32 Periodo = System.Convert.ToInt32(this.Repeticion.SelectedValue);
+            DateTime StartFecha =(DateTime)this.datePicker0.SelectedDate;
             DateTime EndFecha = (DateTime)this.datePicker1.SelectedDate;
 
             //  Int32 Minuto = System.Convert.ToInt32(this.comboBoxMinutos.SelectedValue);
+
+            int CurDia = (int)curFecha.DayOfWeek;
+
 
             valores.Add(new Registro("Duracion", Duracion));
             valores.Add(new Registro("IdPaciente", this.curPaciente));
             valores.Add(new Registro("IdTerapeuta", Terapeuta));
             valores.Add(new Registro("Periodo", Periodo));
-            valores.Add(new Registro("Fecha", curFecha.ToString("yyyy-MM-dd HH:mm:ss")));
+            valores.Add(new Registro("Fecha", StartFecha.ToString("yyyy-MM-dd HH:mm:ss")));
             valores.Add(new Registro("Fecha2", EndFecha.ToString("yyyy-MM-dd HH:mm:ss")));
+            valores.Add(new Registro("Dia", CurDia));
+            valores.Add(new Registro("Hora", curFecha.ToString("2000-01-01 HH:mm:ss")));
 
 
 
@@ -176,12 +189,20 @@ namespace cehavi_control
 
         private void GetFecha_Click(object sender, RoutedEventArgs e)
         {
+            string[] Dias = { "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
             Calendar1 dlg1 = new Calendar1();
+
+
             dlg1.NombrePaciente = this.NombrePaciente;
             dlg1.Duracion = System.Convert.ToInt32(this.textBox.Text);
             dlg1.ShowDialog();
-            this.Fecha.Text = dlg1.CurValue;
+            this.TerapiaFecha = dlg1.CurValue;
 
+            DateTime curFecha = System.Convert.ToDateTime(this.TerapiaFecha);
+            int curDia = (int) curFecha.DayOfWeek;
+
+            this.Fecha.Text = Dias[curDia];
+            this.Hora.Text = curFecha.ToShortTimeString();
 
         }
 

@@ -139,6 +139,7 @@
                             <DataGridTextColumn Binding="{Binding Duracion}" Header="Duracion" />
                             <DataGridTextColumn Binding="{Binding Periodo}" Header="Periodo" />
                             <DataGridTextColumn Binding="{Binding Terapeuta}" Header="Terapeuta" />
+                            <DataGridTextColumn Binding="{Binding Fin}" Header="Fin" />
 
                         </DataGrid.Columns>
 
