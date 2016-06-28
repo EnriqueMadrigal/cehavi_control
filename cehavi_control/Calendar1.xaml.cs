@@ -72,9 +72,9 @@ namespace cehavi_control
         {
 
 
-            this.webBrowser1.Navigate("E:\\wamp\\www\\nailsalon\\testcalendar.html");
-            
-         
+            //this.webBrowser1.Navigate("E:\\wamp\\www\\nailsalon\\testcalendar.html");
+            this.webBrowser1.Navigate("C:\\Datos\\web\\testcalendar.html");
+
 
         }
 

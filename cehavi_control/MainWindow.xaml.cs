@@ -91,7 +91,7 @@ namespace cehavi_control
 
         private void otraOpcion(object sender, RoutedEventArgs e)
         {
-            return;
+           // return;
             
             /*
 
@@ -147,9 +147,12 @@ namespace cehavi_control
   */
             DatosCehavi datos1 = new DatosCehavi();
            datos1.Connect();
-            datos1.executeQuery("delete from terapias");
-            //datos1.executeQuery("insert into repeticion(Nombre) values('Mensual')");
-            //datos1.executeQuery("insert into repeticion(Nombre) values('Una sola vez')");
+            datos1.executeQuery("delete from repeticion");
+            datos1.executeQuery("insert into repeticion(Id,Nombre) values(1,'Una sola vez')");
+            datos1.executeQuery("insert into repeticion(Id,Nombre) values(2,'Diario')");
+            datos1.executeQuery("insert into repeticion(Id,Nombre) values(3,'Semanal')");
+            datos1.executeQuery("insert into repeticion(Id,Nombre) values(4,'Mensual')");
+
 
 
 

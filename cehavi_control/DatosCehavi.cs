@@ -426,6 +426,8 @@ namespace cehavi_control
 
 
 
+
+
         public Int32 InsertaNombreCampo(string nombre, string tabla, string nombreCampo)
         {
 
@@ -496,14 +498,14 @@ namespace cehavi_control
         }
 
 
-        public AutoCompleteStringCollection GetAutoCompleteCollection(string tabla, string nombreIndex)
+        public Int32 GetValueTabla(Int32 numRegistro, string tabla, string indexName, string nombreIndex)
         {
-            AutoCompleteStringCollection MyCollection = new AutoCompleteStringCollection();
 
+            Int32 Curvalue = 0;
 
             try
             {
-                string query = "select " + nombreIndex + " from " + tabla;
+                string query = "select " + nombreIndex + " from " + tabla + " where " + indexName + "=" + numRegistro.ToString();
                 OleDbCommand com = new OleDbCommand();
 
                 com.Connection = GetConnection();
@@ -512,27 +514,62 @@ namespace cehavi_control
 
                 if (resuldata.HasRows)
                 {
+                    resuldata.Read();
+                    System.Type curType = resuldata.GetType();
 
-
-                    while (resuldata.Read() )
-                    {
-                        MyCollection.Add(resuldata.GetString(0));
-                    }
+                    Curvalue = resuldata.GetInt32(0);
+                    if (curType == typeof(Int32)) Curvalue = resuldata.GetInt32(0);
+                    if (curType == typeof(Int16)) Curvalue = System.Convert.ToInt32(resuldata.GetInt16(0));
+                    if (curType == typeof(Int64)) Curvalue = System.Convert.ToInt32(resuldata.GetInt64(0));
+                    if (curType == typeof(Byte)) Curvalue = System.Convert.ToInt32(resuldata.GetByte(0));
 
                 }
-                
             }
 
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Exception: BuscaNombre");
+                MessageBox.Show(e.Message, "Exception: GetNombreTabla");
+                return 0;
+            }
+
+
+            return Curvalue;
+
+        }
+
+
+
+      public DataTable GetEvents(DateTime startDate, DateTime endDate)
+        {
+
+            try
+            {
+                DataTable ds = new DataTable("Eventos");
+                OleDbCommand com = new OleDbCommand();
+
+                com.Connection = GetConnection();
+                com.CommandText = "select * from terapias where Fecha>'" + startDate.ToString("yyyy-MM-dd HH:mm:ss") + "' and Fecha2<'" + endDate.ToString("yyyy-MM-dd HH:mm:ss") + "' order by IdPaciente";
+                OleDbDataAdapter adapt = new OleDbDataAdapter();
+                adapt.SelectCommand = com;
+                adapt.Fill(ds);
+                //this.curConnection.Close();
+                return ds;
+
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Exception: LoadData");
                 return null;
             }
 
-            
-            return MyCollection;
-            
+
+
+
+
+
+
         }
 
 

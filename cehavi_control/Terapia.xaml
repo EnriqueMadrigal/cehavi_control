@@ -9,32 +9,34 @@
     <Grid>
         <Label x:Name="label" Content="Dia" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Repetición:" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="Terapeuta:" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBoxTerapeutas" HorizontalAlignment="Left" Margin="88,126,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label3" Content="Terapeuta:" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBoxTerapeutas" HorizontalAlignment="Left" Margin="88,161,0,0" VerticalAlignment="Top" Width="120"/>
 
 
-        <Button x:Name="button1" Height="48" VerticalAlignment="Top" Width="48" Margin="-180,170,-48,0" Click="close_Click">
+        <Button x:Name="button1" Height="48" VerticalAlignment="Top" Width="48" Margin="52,200,192,0" Click="close_Click">
             <Button.Content>
                 <Image Source="C:\Datos\res\stop.png" />
             </Button.Content>
         </Button>
 
-        <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Margin="100,170,-48,0" Click="save_Click">
+        <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Margin="197,200,47,0" Click="save_Click">
             <Button.Content>
                 <Image Source="C:\Datos\res\bigcheck.png" />
             </Button.Content>
         </Button>
-        <Label x:Name="label4" Content="Duración:" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="88,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" TextChanged="textBox_TextChanged"/>
+        <Label x:Name="label4" Content="Duración:" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="88,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" TextChanged="textBox_TextChanged"/>
 
         <Button x:Name="button3" Height="32" VerticalAlignment="Top" Width="32" Margin="100,20,-48,0" Click="GetFecha_Click">
             <Button.Content>
                 <Image Source="C:\Datos\res\calicon.png" />
             </Button.Content>
         </Button>
-        <TextBox x:Name="Fecha" HorizontalAlignment="Left" Height="23" Margin="42,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+        <TextBox x:Name="Fecha" HorizontalAlignment="Left" Height="23" Margin="42,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
         <ComboBox x:Name="Repeticion" HorizontalAlignment="Left" Margin="88,63,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label2" Content="Min." HorizontalAlignment="Left" Margin="136,91,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="Min." HorizontalAlignment="Left" Margin="136,126,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label5" Content="Hasta:" HorizontalAlignment="Left" Margin="37,93,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePicker1" HorizontalAlignment="Left" Margin="88,95,0,0" VerticalAlignment="Top" Width="120"/>
 
 
     </Grid>

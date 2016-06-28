@@ -413,7 +413,7 @@ namespace cehavi_control
         private void CargaTerapias()
         {
 
-            return;
+            //return;
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
 
@@ -435,6 +435,7 @@ namespace cehavi_control
 
             foreach (DataRow c in TerapiasTemp.Rows)
             {
+
                 string tipoA = c["Fecha"].GetType().ToString();
                 Int32 IdTerapia = (Int32)c["Id"];
                 Int16 IdTerapueta = (Int16)c["IdTerapeuta"];
