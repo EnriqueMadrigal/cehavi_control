@@ -540,7 +540,7 @@ namespace cehavi_control
 
 
 
-      public DataTable GetEvents(DateTime startDate, DateTime endDate)
+      public DataTable GetEvents()
         {
 
             try
@@ -549,8 +549,10 @@ namespace cehavi_control
                 OleDbCommand com = new OleDbCommand();
 
                 com.Connection = GetConnection();
-                com.CommandText = "select * from terapias where Fecha>'" + startDate.ToString("yyyy-MM-dd HH:mm:ss") + "' and Fecha2<'" + endDate.ToString("yyyy-MM-dd HH:mm:ss") + "' order by IdPaciente";
-                OleDbDataAdapter adapt = new OleDbDataAdapter();
+                //com.CommandText = "select * FROM Terapias WHERE(DatePart('m', Fecha) = " + startDate.Month.ToString() + ") OR (DatePart('m', Fecha) = " + endDate.Month.ToString() + ") order by IdPaciente";
+                com.CommandText = "select * from terapias order by IdPaciente";
+
+                    OleDbDataAdapter adapt = new OleDbDataAdapter();
                 adapt.SelectCommand = com;
                 adapt.Fill(ds);
                 //this.curConnection.Close();
