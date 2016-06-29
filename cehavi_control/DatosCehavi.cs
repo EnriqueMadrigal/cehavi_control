@@ -660,12 +660,12 @@ namespace cehavi_control
                 if (DateTime.Compare(BFecha, StartDate) <= 0) continue;
                 if (DateTime.Compare(AFecha, EndDate) >= 0) continue;
 
-                if (DateTime.Compare(AFecha, StartDate) < 0) AFecha = StartDate;
+                //if (DateTime.Compare(AFecha, StartDate) > 0) AFecha = StartDate;
                 if (DateTime.Compare(BFecha, EndDate) > 0) BFecha = EndDate;
 
 
 
-                while (DateTime.Compare(AFecha,BFecha)>0)
+                while (DateTime.Compare(AFecha,BFecha)<0)
                 {
                     int curDia = (int)AFecha.DayOfWeek;
                     int diasadd = 0;
@@ -673,6 +673,7 @@ namespace cehavi_control
                     if (curDia < Dia) diasadd = Dia - curDia;
                     DateTime EventoFecha = AFecha.AddDays(diasadd);
 
+                    DatosEventos.Rows.Add(IdEvento, AFecha.ToString("yyyy-MM-dd HH:mm:ss"),Duracion,NombrePaciente);
 
                     if (Periodo == 2) AFecha = AFecha.AddDays(1);
                     if (Periodo == 3) AFecha = AFecha.AddDays(7);

@@ -149,10 +149,14 @@ namespace cehavi_control
   */
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
+
+
+
+            DataTable Eventos = datos1.GetCurretEvents(new DateTime(2016,1,1), new DateTime(2016,12,1));
             //datos1.executeQuery("delete from repeticion");
             //datos1.executeQuery("insert into repeticion(Id,Nombre) values(1,'Una sola vez')");
             //datos1.executeQuery("insert into repeticion(Id,Nombre) values(2,'Diario')");
-            datos1.executeQuery("update terapias set Hora='2010-06-10 16:00:00', Dia=2");
+            //datos1.executeQuery("update terapias set Hora='2010-06-10 16:00:00', Dia=2");
 
 
                 // yyyy-MM-dd HH:mm:ss
