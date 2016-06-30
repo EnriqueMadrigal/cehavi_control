@@ -331,6 +331,9 @@ namespace cehavi_control
         private void button10_Click(object sender, RoutedEventArgs e)
         {
 
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+
             if (this.curPaciente == 0)
             {
                 MessageBox.Show("Por favor primero, guarde el paciente y luego proceda a dar de alta las terapias", "Advertencia");
@@ -341,6 +344,8 @@ namespace cehavi_control
             dlg1.SetCurPaciente(this.curPaciente);
             dlg1.NombrePaciente = this.NombrePaciente.Text;
             dlg1.ShowDialog();
+            Int32 LastId = dlg1.GetCurTerapia();
+            datos1.CreateCurretEvents(LastId);
 
             MessageBox.Show("Operación realizada", "Información");
             CargaTerapias();

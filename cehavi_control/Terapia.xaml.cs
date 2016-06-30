@@ -60,6 +60,11 @@ namespace cehavi_control
         }
 
 
+        public Int32 GetCurTerapia()
+        {
+            return this.curTerapia;
+        }
+
         public void SetCurPaciente (Int32 newPaciente)
         {
             this.curPaciente = newPaciente;
@@ -176,7 +181,7 @@ namespace cehavi_control
 
 
             if (this.curTerapia != 0) datos1.UpdateData(valores, this.curTerapia, "Id", "terapias");
-            else datos1.InsertData(valores, "terapias");
+            else this.curTerapia = datos1.InsertData(valores, "terapias");
 
 
             //MessageBox.Show(curFecha.ToShortDateString(),"Fecha");

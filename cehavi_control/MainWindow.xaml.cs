@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections;
-
+using System.IO;
 
 namespace cehavi_control
 {
@@ -152,20 +152,49 @@ namespace cehavi_control
 
 
 
-            DataTable Eventos = datos1.GetCurretEvents(new DateTime(2016,1,1), new DateTime(2016,12,1));
+           // DataTable Eventos = datos1.GetCurretEvents(new DateTime(2016,6,1), new DateTime(2016,8,1));
             //datos1.executeQuery("delete from repeticion");
             //datos1.executeQuery("insert into repeticion(Id,Nombre) values(1,'Una sola vez')");
             //datos1.executeQuery("insert into repeticion(Id,Nombre) values(2,'Diario')");
             //datos1.executeQuery("update terapias set Hora='2010-06-10 16:00:00', Dia=2");
 
 
-                // yyyy-MM-dd HH:mm:ss
+            // yyyy-MM-dd HH:mm:ss
 
 
             //datos1.executeQuery("delete from Colonia where Nombre=''");
             //datos1.executeQuery("delete from Ciudad where Nombre=''");
             //datos1.executeQuery("update pacientes set idestado=14");
 
+
+            /*
+           StreamWriter file = new System.IO.StreamWriter(@"C:\Datos\Web\events.json");
+
+            file.WriteLine("[");
+            char[] caracter1 = { '"' };
+            string quotes = new string(caracter1);
+
+            Boolean firstline = false;
+            foreach (DataRow c in Eventos.Rows)
+            {
+                if (!firstline) 
+                {
+                    file.WriteLine(",");
+                    firstline = true;
+                }
+
+                file.WriteLine("{");
+                file.WriteLine(quotes  + "id" + quotes + ":"   );
+
+
+                file.WriteLine("{");
+
+
+            }
+
+
+            file.WriteLine("]");
+            */
         }
 
 

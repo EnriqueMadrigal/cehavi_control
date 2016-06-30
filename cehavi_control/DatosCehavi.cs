@@ -162,11 +162,11 @@ namespace cehavi_control
         }
 
 
-        public bool InsertData(ArrayList datos, string Table)
+        public Int32 InsertData(ArrayList datos, string Table)
         {
 
 
-
+            Int32 LastInserted = 0;
             string query = "";
 
             query = "INSERT INTO " + Table + " (";
@@ -243,7 +243,7 @@ namespace cehavi_control
 
 
 
-            MessageBox.Show(query, "Query");
+            //MessageBox.Show(query, "Query");
 
        
 
@@ -257,17 +257,27 @@ namespace cehavi_control
                 com.ExecuteNonQuery();
                 //com.Dispose();
 
+                com.CommandText = "SELECT @@IDENTITY";
+                OleDbDataReader resuldata = com.ExecuteReader();
+
+                if (resuldata.HasRows)
+                {
+                    resuldata.Read();
+                    LastInserted = resuldata.GetInt32(0);
+                }
+
+
             }
 
 
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Exception: InsertData");
-                return false;
+                return 0;
             }
 
 
-            return true;
+            return LastInserted;
 
         }
 
@@ -616,24 +626,109 @@ namespace cehavi_control
 
         }
 
+        /*
+         *
+         *
+         * 
 
-        public DataTable GetCurretEvents(DateTime StartDate, DateTime EndDate)
+
+
+
+
+         public DataTable GetCurretEvents(DateTime StartDate, DateTime EndDate)
+         {
+             DataTable DatosEventos = new DataTable("Eventos");
+
+             DatosCehavi datos1 = new DatosCehavi();
+             datos1.Connect();
+
+             DataTable TempData = datos1.GetEvents();
+
+             string NombrePaciente = "";
+             Int16 StatusPaciente = 0;
+             int CurPaciente = 0;
+
+             DatosEventos.Columns.Add("IdEvento", Type.GetType("System.Int32"));
+             DatosEventos.Columns.Add("Fecha", Type.GetType("System.DateTime"));
+             DatosEventos.Columns.Add("Duracion", Type.GetType("System.Int16"));
+             DatosEventos.Columns.Add("Title", Type.GetType("System.String"));
+
+
+             foreach (DataRow c in TempData.Rows)
+             {
+                 Int32 IdEvento = (Int32)c["Id"];
+                 Int32 IdPaciente = (Int32)c["IdPaciente"];
+                 Int16 Duracion = (Int16)c["Duracion"];
+                 Int16 IdTerapueta = (Int16)c["IdTerapeuta"];
+                 Int16 Periodo = (Int16)c["Periodo"];
+                 DateTime AFecha = (DateTime)c["Fecha"];
+                 DateTime BFecha = (DateTime)c["Fecha2"];
+                 Byte Dia = (Byte)c["Dia"];
+
+
+                 if (CurPaciente == 0 || IdPaciente != CurPaciente)
+                 {
+                     CurPaciente = IdPaciente;
+                     DataTable DatosPaciente = datos1.LoadData("select * from pacientes where IdPaciente=" + IdPaciente.ToString());
+                     NombrePaciente = DatosPaciente.Rows[0]["Nombre"].ToString();
+                     StatusPaciente = (Int16)DatosPaciente.Rows[0]["estatus"];
+                 }
+
+
+                 if (DateTime.Compare(BFecha, StartDate) <= 0) continue;
+                 if (DateTime.Compare(AFecha, EndDate) >= 0) continue;
+
+                 //if (DateTime.Compare(AFecha, StartDate) > 0) AFecha = StartDate;
+                 if (DateTime.Compare(BFecha, EndDate) > 0) BFecha = EndDate;
+
+
+
+                 while (DateTime.Compare(AFecha,BFecha)<0)
+                 {
+                     int curDia = (int)AFecha.DayOfWeek;
+                     int diasadd = 0;
+                     if (curDia > Dia) diasadd = (6 - curDia) + Dia;
+                     if (curDia < Dia) diasadd = Dia - curDia;
+                     DateTime EventoFecha = AFecha.AddDays(diasadd);
+
+                     DatosEventos.Rows.Add(IdEvento, AFecha.ToString("yyyy-MM-dd HH:mm:ss"),Duracion,NombrePaciente);
+
+                     if (Periodo == 2) AFecha = AFecha.AddDays(1);
+                     if (Periodo == 3) AFecha = AFecha.AddDays(7);
+                     if (Periodo == 4) AFecha = AFecha.AddMonths(1);
+
+
+
+                 }
+
+
+
+
+
+
+             }
+
+             return DatosEventos;
+
+         }
+
+         */
+
+
+        public void CreateCurretEvents(Int32 curTerapia)
         {
-            DataTable DatosEventos = new DataTable("Eventos");
-            
+           
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
 
-            DataTable TempData = datos1.GetEvents();
+            //DataTable TempData = datos1.GetEvents();
+            DataTable TempData = datos1.LoadData("select * from Terapias where Id=" + curTerapia.ToString());
 
             string NombrePaciente = "";
             Int16 StatusPaciente = 0;
             int CurPaciente = 0;
-            
-            DatosEventos.Columns.Add("IdEvento", Type.GetType("System.Int32"));
-            DatosEventos.Columns.Add("Fecha", Type.GetType("System.DateTime"));
-            DatosEventos.Columns.Add("Duracion", Type.GetType("System.Int16"));
-            DatosEventos.Columns.Add("Title", Type.GetType("System.String"));
+
+        
 
 
             foreach (DataRow c in TempData.Rows)
@@ -645,6 +740,7 @@ namespace cehavi_control
                 Int16 Periodo = (Int16)c["Periodo"];
                 DateTime AFecha = (DateTime)c["Fecha"];
                 DateTime BFecha = (DateTime)c["Fecha2"];
+                DateTime Hora = (DateTime)c["Hora"];
                 Byte Dia = (Byte)c["Dia"];
 
 
@@ -657,23 +753,31 @@ namespace cehavi_control
                 }
 
 
-                if (DateTime.Compare(BFecha, StartDate) <= 0) continue;
-                if (DateTime.Compare(AFecha, EndDate) >= 0) continue;
-
-                //if (DateTime.Compare(AFecha, StartDate) > 0) AFecha = StartDate;
-                if (DateTime.Compare(BFecha, EndDate) > 0) BFecha = EndDate;
 
 
-
-                while (DateTime.Compare(AFecha,BFecha)<0)
+                while (DateTime.Compare(AFecha, BFecha) < 0)
                 {
                     int curDia = (int)AFecha.DayOfWeek;
                     int diasadd = 0;
                     if (curDia > Dia) diasadd = (6 - curDia) + Dia;
                     if (curDia < Dia) diasadd = Dia - curDia;
-                    DateTime EventoFecha = AFecha.AddDays(diasadd);
 
-                    DatosEventos.Rows.Add(IdEvento, AFecha.ToString("yyyy-MM-dd HH:mm:ss"),Duracion,NombrePaciente);
+                    DateTime EventoFecha = AFecha.AddDays(diasadd);
+                    DateTime EventoFechaStart = new DateTime(AFecha.Year, AFecha.Month, AFecha.Day, Hora.Hour, Hora.Minute, 0);
+                    DateTime EventoFechaEnd = EventoFechaStart.AddMinutes(Duracion);
+
+                  
+
+                    ArrayList valores = new ArrayList();
+
+                    valores.Add(new Registro("IdEvento", IdEvento));
+                    valores.Add(new Registro("Title", "Prueba"));
+                    valores.Add(new Registro("start_event", EventoFechaStart.ToString("yyyy-MM-dd HH:mm:ss")));
+                    valores.Add(new Registro("end_event", EventoFechaEnd.ToString("yyyy-MM-dd HH:mm:ss")));
+                    valores.Add(new Registro("status1", 0));
+                    valores.Add(new Registro("status2", 0));
+                    datos1.InsertData(valores, "Eventos");
+
 
                     if (Periodo == 2) AFecha = AFecha.AddDays(1);
                     if (Periodo == 3) AFecha = AFecha.AddDays(7);
@@ -687,14 +791,12 @@ namespace cehavi_control
 
 
 
-               
+
             }
 
-            return DatosEventos;
+          
 
         }
-
-
 
         /////////////////
 
