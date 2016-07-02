@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,14 +67,15 @@ namespace cehavi_control
         public Calendar1()
         {
             InitializeComponent();
+            createFile();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
 
-            this.webBrowser1.Navigate("E:\\wamp\\www\\nailsalon\\testcalendar.html");
-            //this.webBrowser1.Navigate("C:\\Datos\\web\\testcalendar.html");
+            //this.webBrowser1.Navigate("E:\\wamp\\www\\nailsalon\\testcalendar.html");
+            this.webBrowser1.Navigate("C:\\Datos\\web\\testcalendar.html");
 
 
         }
@@ -127,6 +129,32 @@ namespace cehavi_control
             this.webBrowser1.InvokeScript("Testfunction3");
         }
 
+
+
+        private void createFile()
+        {
+
+            StreamWriter file = new System.IO.StreamWriter(@"C:\Datos\Web\getevents.js");
+
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+
+
+            file.WriteLine("var curEvents = ");
+
+            DateTime CurTime = DateTime.Now;
+            DateTime EndTime = CurTime.AddMonths(1);
+
+
+            file.WriteLine(datos1.getJsonEvents(CurTime, EndTime));
+            file.WriteLine(";");
+
+            file.Close();
+
+
+
+
+        }
 
     }
 }

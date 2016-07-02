@@ -149,10 +149,12 @@ namespace cehavi_control
   */
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
+            datos1.executeQuery("delete from Eventos");
 
+            return;
 
+            DataTable Eventos = datos1.LoadData("select * from Eventos");
 
-           // DataTable Eventos = datos1.GetCurretEvents(new DateTime(2016,6,1), new DateTime(2016,8,1));
             //datos1.executeQuery("delete from repeticion");
             //datos1.executeQuery("insert into repeticion(Id,Nombre) values(1,'Una sola vez')");
             //datos1.executeQuery("insert into repeticion(Id,Nombre) values(2,'Diario')");
@@ -167,34 +169,50 @@ namespace cehavi_control
             //datos1.executeQuery("update pacientes set idestado=14");
 
 
-            /*
-           StreamWriter file = new System.IO.StreamWriter(@"C:\Datos\Web\events.json");
+           
+           //StreamWriter file = new System.IO.StreamWriter(@"C:\Datos\Web\events.json");
 
-            file.WriteLine("[");
+            StringBuilder json = new StringBuilder();
+
+
+           // file.WriteLine("[");
+           json.Append("[");
+
             char[] caracter1 = { '"' };
             string quotes = new string(caracter1);
 
-            Boolean firstline = false;
-            foreach (DataRow c in Eventos.Rows)
+                   foreach (DataRow c in Eventos.Rows)
             {
-                if (!firstline) 
-                {
-                    file.WriteLine(",");
-                    firstline = true;
-                }
+                
 
-                file.WriteLine("{");
-                file.WriteLine(quotes  + "id" + quotes + ":"   );
+                // file.WriteLine("{");
+                // file.WriteLine(quotes  + "id" + quotes + ":" + c["IdEvento"].ToString() + "," );
+                // file.WriteLine(quotes + "title" + quotes + ":" + quotes + c["Title"].ToString() + quotes + ",");
+                // file.WriteLine(quotes + "start" + quotes + ":,");
 
+                DateTime startFecha = (DateTime)c["start_event"];
+                DateTime endFecha = (DateTime)c["end_event"];
 
-                file.WriteLine("{");
+                json.Append("{");
+                json.Append(quotes  + "id" + quotes + ":" + c["IdEvento"].ToString() + "," );
+                json.Append(quotes + "title" + quotes + ":" + quotes + c["Title"].ToString() + quotes + ",");
+                json.Append(quotes + "start" + quotes + ":" + quotes + startFecha.ToString("o") + quotes + ",");
+                json.Append(quotes + "end" + quotes + ":" + quotes + endFecha.ToString("o") + quotes + ",");
+                json.Append(quotes + "allday" + quotes + ":" + "false" + ",");
+                json.Append(quotes + "editable" + quotes + ":" + "false");
+                
+                json.Append("}");
 
+                json.Append(",");
 
             }
 
+            json.Remove(json.Length - 1, 1);
+            // file.WriteLine("]");
+            json.Append("]");
+            string jsonstring = json.ToString();
 
-            file.WriteLine("]");
-            */
+
         }
 
 

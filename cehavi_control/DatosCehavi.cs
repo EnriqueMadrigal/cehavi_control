@@ -723,11 +723,13 @@ namespace cehavi_control
 
             //DataTable TempData = datos1.GetEvents();
             DataTable TempData = datos1.LoadData("select * from Terapias where Id=" + curTerapia.ToString());
+            DataTable TablaColores = datos1.LoadData("select * from Colores order by Id");
 
             string NombrePaciente = "";
             Int16 StatusPaciente = 0;
+            Int32 CurColor = 0;
             int CurPaciente = 0;
-
+            string ColorPaciente = "#000000";
         
 
 
@@ -750,40 +752,60 @@ namespace cehavi_control
                     DataTable DatosPaciente = datos1.LoadData("select * from pacientes where IdPaciente=" + IdPaciente.ToString());
                     NombrePaciente = DatosPaciente.Rows[0]["Nombre"].ToString();
                     StatusPaciente = (Int16)DatosPaciente.Rows[0]["estatus"];
+                    CurColor = IdPaciente % 55;
+                    ColorPaciente = "#" + TablaColores.Rows[CurColor]["Color"].ToString();
                 }
 
 
+                int curDia = (int)AFecha.DayOfWeek;
+                int diasadd = 0;
+                if (curDia > Dia) diasadd = (7 - curDia) + Dia;
+                if (curDia < Dia) diasadd = Dia - curDia;
+
+                DateTime EventoFecha = AFecha.AddDays(diasadd);
+                DateTime EventoFechaStart = new DateTime(AFecha.Year, AFecha.Month, EventoFecha.Day, Hora.Hour, Hora.Minute, 0);
+                DateTime EventoFechaEnd = EventoFechaStart.AddMinutes(Duracion);
 
 
-                while (DateTime.Compare(AFecha, BFecha) < 0)
+
+
+                while (DateTime.Compare(EventoFechaStart, BFecha) < 0)
                 {
-                    int curDia = (int)AFecha.DayOfWeek;
-                    int diasadd = 0;
-                    if (curDia > Dia) diasadd = (6 - curDia) + Dia;
-                    if (curDia < Dia) diasadd = Dia - curDia;
 
-                    DateTime EventoFecha = AFecha.AddDays(diasadd);
-                    DateTime EventoFechaStart = new DateTime(AFecha.Year, AFecha.Month, AFecha.Day, Hora.Hour, Hora.Minute, 0);
-                    DateTime EventoFechaEnd = EventoFechaStart.AddMinutes(Duracion);
 
-                  
 
                     ArrayList valores = new ArrayList();
 
                     valores.Add(new Registro("IdEvento", IdEvento));
-                    valores.Add(new Registro("Title", "Prueba"));
+                    valores.Add(new Registro("Title", NombrePaciente));
                     valores.Add(new Registro("start_event", EventoFechaStart.ToString("yyyy-MM-dd HH:mm:ss")));
                     valores.Add(new Registro("end_event", EventoFechaEnd.ToString("yyyy-MM-dd HH:mm:ss")));
+                    valores.Add(new Registro("Color", ColorPaciente));
                     valores.Add(new Registro("status1", 0));
                     valores.Add(new Registro("status2", 0));
+
                     datos1.InsertData(valores, "Eventos");
 
 
-                    if (Periodo == 2) AFecha = AFecha.AddDays(1);
-                    if (Periodo == 3) AFecha = AFecha.AddDays(7);
-                    if (Periodo == 4) AFecha = AFecha.AddMonths(1);
+                    if (Periodo == 2)
+                    {
+                        EventoFechaStart = EventoFechaStart.AddDays(1);
+                        EventoFechaEnd = EventoFechaEnd.AddDays(1);
+                    }
 
+                    if (Periodo == 3)
+                    {
+                        EventoFechaStart = EventoFechaStart.AddDays(7);
+                        EventoFechaEnd = EventoFechaEnd.AddDays(7);
+                    }
 
+                    if (Periodo == 4)
+                    {
+                        EventoFechaStart = EventoFechaStart.AddMonths(1);
+                        EventoFechaEnd = EventoFechaEnd.AddMonths(1);
+                    }
+
+                                        
 
                 }
 
@@ -799,6 +821,50 @@ namespace cehavi_control
         }
 
         /////////////////
+
+
+public string getJsonEvents(DateTime startDate, DateTime endDate)
+        {
+
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+            
+            DataTable Eventos = datos1.LoadData("select * from Eventos");
+
+            StringBuilder json = new StringBuilder();
+
+
+            char[] caracter1 = { '"' };
+            string quotes = new string(caracter1);
+
+            json.Append("[");
+
+            
+            foreach (DataRow c in Eventos.Rows)
+            {
+
+                DateTime startFecha = (DateTime)c["start_event"];
+                DateTime endFecha = (DateTime)c["end_event"];
+
+                json.Append("{");
+                json.Append(quotes + "id" + quotes + ":" + c["IdEvento"].ToString() + ",");
+                json.Append(quotes + "title" + quotes + ":" + quotes + c["Title"].ToString() + quotes + ",");
+                json.Append(quotes + "start" + quotes + ":" + quotes + startFecha.ToString("o") + quotes + ",");
+                json.Append(quotes + "end" + quotes + ":" + quotes + endFecha.ToString("o") + quotes + ",");
+                json.Append(quotes + "color" + quotes + ":" + quotes + c["Color"].ToString() + quotes + ",");
+                json.Append(quotes + "allday" + quotes + ":" + "false" + ",");
+                json.Append(quotes + "editable" + quotes + ":" + "false");
+                json.Append("}");
+                json.Append(",");
+
+            }
+
+            json.Remove(json.Length - 1, 1);
+            json.Append("]");
+            return json.ToString();
+
+        }
+
 
     }
 

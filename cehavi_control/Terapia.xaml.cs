@@ -65,7 +65,7 @@ namespace cehavi_control
             return this.curTerapia;
         }
 
-        public void SetCurPaciente (Int32 newPaciente)
+        public void SetCurPaciente(Int32 newPaciente)
         {
             this.curPaciente = newPaciente;
         }
@@ -86,7 +86,7 @@ namespace cehavi_control
             */
 
             datos1.CargaComboBoxData(this.Repeticion, "select Id,Nombre from repeticion");
-            
+
 
             if (this.curTerapia == 0)
             {
@@ -101,21 +101,21 @@ namespace cehavi_control
             {
 
                 DataTable datosTerapia = datos1.LoadData("select Fecha, Duracion, IdTerapeuta, Fecha2, Dia, Hora, Periodo from terapias where Id=" + this.curTerapia.ToString());
-                  Byte Dia = (Byte)datosTerapia.Rows[0]["Dia"];
-                    Int16 Duracion = (Int16)datosTerapia.Rows[0]["Duracion"];
-                    Int16 IdTerapueta = (Int16)datosTerapia.Rows[0]["IdTerapeuta"];
-                    Int16 Periodo = (Int16)datosTerapia.Rows[0]["Periodo"];
-                    // Byte Hora = (Byte)datosTerapia.Rows[0]["Hora"];
-                    // Byte Minuto = (Byte)datosTerapia.Rows[0]["Minuto"];
-                    DateTime curFecha = (DateTime)datosTerapia.Rows[0]["Fecha"];
-                    DateTime endFecha = (DateTime)datosTerapia.Rows[0]["Fecha2"];
-                    DateTime Hora = (DateTime)datosTerapia.Rows[0]["Hora"];
+                Byte Dia = (Byte)datosTerapia.Rows[0]["Dia"];
+                Int16 Duracion = (Int16)datosTerapia.Rows[0]["Duracion"];
+                Int16 IdTerapueta = (Int16)datosTerapia.Rows[0]["IdTerapeuta"];
+                Int16 Periodo = (Int16)datosTerapia.Rows[0]["Periodo"];
+                // Byte Hora = (Byte)datosTerapia.Rows[0]["Hora"];
+                // Byte Minuto = (Byte)datosTerapia.Rows[0]["Minuto"];
+                DateTime curFecha = (DateTime)datosTerapia.Rows[0]["Fecha"];
+                DateTime endFecha = (DateTime)datosTerapia.Rows[0]["Fecha2"];
+                DateTime Hora = (DateTime)datosTerapia.Rows[0]["Hora"];
 
 
 
 
 
-                this.Repeticion.SelectedValue = Periodo; 
+                this.Repeticion.SelectedValue = Periodo;
                 this.comboBoxTerapeutas.SelectedValue = IdTerapueta;
                 this.textBox.Text = Duracion.ToString();
                 this.Repeticion.SelectedValue = 1;
@@ -148,7 +148,7 @@ namespace cehavi_control
 
             ArrayList valores = new ArrayList();
 
-            if (this.TerapiaFecha.Length==0)
+            if (this.TerapiaFecha.Length == 0)
             {
                 MessageBox.Show("Selecciona una fecha", "Advertencia");
                 return;
@@ -156,12 +156,12 @@ namespace cehavi_control
 
             DateTime curFecha = System.Convert.ToDateTime(this.TerapiaFecha);
 
-          //  Int32 Dia = System.Convert.ToInt32(this.comboBoxDias.SelectedValue);
-          //  Int32 Hora = System.Convert.ToInt32(this.comboBoxHoras.SelectedValue);
+            //  Int32 Dia = System.Convert.ToInt32(this.comboBoxDias.SelectedValue);
+            //  Int32 Hora = System.Convert.ToInt32(this.comboBoxHoras.SelectedValue);
             Int32 Duracion = System.Convert.ToInt32(this.textBox.Text);
             Int32 Terapeuta = System.Convert.ToInt32(this.comboBoxTerapeutas.SelectedValue);
             Int32 Periodo = System.Convert.ToInt32(this.Repeticion.SelectedValue);
-            DateTime StartFecha =(DateTime)this.datePicker0.SelectedDate;
+            DateTime StartFecha = (DateTime)this.datePicker0.SelectedDate;
             DateTime EndFecha = (DateTime)this.datePicker1.SelectedDate;
 
             //  Int32 Minuto = System.Convert.ToInt32(this.comboBoxMinutos.SelectedValue);
@@ -189,7 +189,7 @@ namespace cehavi_control
 
             this.Close();
 
-            
+
         }
 
         private void GetFecha_Click(object sender, RoutedEventArgs e)
@@ -203,6 +203,18 @@ namespace cehavi_control
             dlg1.ShowDialog();
             this.TerapiaFecha = dlg1.CurValue;
 
+            if (this.TerapiaFecha == null) 
+            {
+                MessageBox.Show("No introdujo una fecha valida:", "Advertencia");
+                return;
+            }
+
+            if (this.TerapiaFecha.Length==0)
+            {
+                MessageBox.Show("No introdujo una fecha valida:", "Advertencia");
+                return;
+
+            }
             DateTime curFecha = System.Convert.ToDateTime(this.TerapiaFecha);
             int curDia = (int) curFecha.DayOfWeek;
 
