@@ -171,7 +171,7 @@ namespace cehavi_control
             DateTime CurTime = DateTime.Now;
             DateTime EndTime = CurTime.AddMonths(1);
 
-            string json = datos1.getJsonEvents(CurTime, EndTime, "IdEvento in (select Id from Terapias where IdTerapeuta=" + this.curTerapeuta.ToString() + ")");
+            string json = datos1.getJsonEvents(CurTime, EndTime, "IdEvento in (select Id from Terapias where IdTerapeuta=" + this.curTerapeuta.ToString() + ") or IdEvento in (select Id from Citas where IdTerapeuta=" + this.curTerapeuta.ToString() + ")" );
 
             if (json.Length!=0)
             {
@@ -186,7 +186,7 @@ namespace cehavi_control
                 jsonData.Append("var curEvent = [];");
             }
 
-            file.Write(jsonData.ToString());
+            file.WriteLine(jsonData.ToString());
 
             
             file.Close();

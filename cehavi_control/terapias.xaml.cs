@@ -189,7 +189,11 @@ namespace cehavi_control
 
         }
 
+        private void button13_Click(object sender, RoutedEventArgs e)
+        {
 
+            this.Close();
+        }
 
 
     }

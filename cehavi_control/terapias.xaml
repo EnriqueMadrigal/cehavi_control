@@ -8,7 +8,7 @@
         Title="terapias" Height="278.991" Width="449.58" Loaded="Window_Loaded">
     <Grid Margin="0,0,2,0">
 
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="209" Width="351" RenderTransformOrigin="0.238,0.064" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" >
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="228" Width="351" RenderTransformOrigin="0.238,0.064" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" >
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding IdTerapia}" Header="ID" Visibility="Hidden" />
@@ -24,25 +24,30 @@
 
         </DataGrid>
 
-        <Button x:Name="button10" Height="48" VerticalAlignment="Top" Width="48" Click="button10_Click" Margin="320,30,-48,0">
+        <Button x:Name="button10" Height="48" VerticalAlignment="Top" Width="48" Click="button10_Click" Margin="320,10,-48,0">
             <Button.Content>
                 <Image Source="C:\Datos\res\plus.png" />
             </Button.Content>
         </Button>
 
 
-        <Button x:Name="button11" Height="48" VerticalAlignment="Top" Width="48" Click="button11_Click" Margin="320,100,-48,0">
+        <Button x:Name="button11" Height="48" VerticalAlignment="Top" Width="48" Click="button11_Click" Margin="320,70,-48,0">
             <Button.Content>
                 <Image Source="C:\Datos\res\bigcheck.png" />
             </Button.Content>
         </Button>
 
-        <Button x:Name="button12" Height="48" VerticalAlignment="Top" Width="48" Click="button12_Click" Margin="320,170,-48,0">
+        <Button x:Name="button12" Height="48" VerticalAlignment="Top" Width="48" Click="button12_Click" Margin="320,130,-48,0">
             <Button.Content>
                 <Image Source="C:\Datos\res\trash.png" />
             </Button.Content>
         </Button>
 
+        <Button x:Name="button13" Height="48" VerticalAlignment="Top" Width="48" Click="button13_Click" Margin="320,190,-48,0">
+            <Button.Content>
+                <Image Source="C:\Datos\res\stop.png" />
+            </Button.Content>
+        </Button>
 
 
 

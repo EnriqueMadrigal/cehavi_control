@@ -177,6 +177,12 @@ namespace cehavi_control
 
         }
 
+
+        private void button13_Click(object sender, RoutedEventArgs e)
+        {
+
+            this.Close();
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CargaCitas();
