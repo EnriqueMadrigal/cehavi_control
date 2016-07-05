@@ -126,47 +126,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Terapias" Height="24" VerticalAlignment="Top">
-                <Grid Background="#FFE5E5E5">
-
-                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="209" Width="287" RenderTransformOrigin="0.238,0.064" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" >
-
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding IdTerapia}" Header="ID" Visibility="Hidden" />
-                            <DataGridTextColumn Binding="{Binding Inicio}" Header="Inicio" />
-                            <DataGridTextColumn Binding="{Binding Dia}" Header="Dia" />
-                            <DataGridTextColumn Binding="{Binding Hora}" Header="Hora" />
-                            <DataGridTextColumn Binding="{Binding Duracion}" Header="Duracion" />
-                            <DataGridTextColumn Binding="{Binding Periodo}" Header="Periodo" />
-                            <DataGridTextColumn Binding="{Binding Terapeuta}" Header="Terapeuta" />
-                            <DataGridTextColumn Binding="{Binding Fin}" Header="Fin" />
-
-                        </DataGrid.Columns>
-
-                    </DataGrid>
-
-                    <Button x:Name="button10" Height="48" VerticalAlignment="Top" Width="48" Click="button10_Click" Margin="220,30,-48,0">
-                        <Button.Content>
-                            <Image Source="C:\Datos\res\plus.png" />
-                        </Button.Content>
-                    </Button>
-
-
-                    <Button x:Name="button11" Height="48" VerticalAlignment="Top" Width="48" Click="button11_Click" Margin="220,100,-48,0">
-                        <Button.Content>
-                            <Image Source="C:\Datos\res\bigcheck.png" />
-                        </Button.Content>
-                    </Button>
-
-                    <Button x:Name="button12" Height="48" VerticalAlignment="Top" Width="48" Click="button12_Click" Margin="220,170,-48,0">
-                        <Button.Content>
-                            <Image Source="C:\Datos\res\trash.png" />
-                        </Button.Content>
-                    </Button>
-
-
-                </Grid>
-            </TabItem>
+          
 
 
         </TabControl>

@@ -38,6 +38,22 @@
                     <Image Source="C:\Datos\res\customer.png" />
                 </Button.Content>
             </Button>
+            <Separator Height="52" Margin="0" VerticalAlignment="Top" Width="2"/>
+
+
+            <Button x:Name="button11" Height="48" VerticalAlignment="Top" Width="48" Click="terapiasPacientes" HorizontalAlignment="Right">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\terapias.png" />
+                </Button.Content>
+            </Button>
+
+
+            <Button x:Name="button12" Height="48" VerticalAlignment="Top" Width="48" Click="citasPacientes" HorizontalAlignment="Right">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\citas.png" />
+                </Button.Content>
+            </Button>
+
 
 
             <Button x:Name="button10" Height="48" VerticalAlignment="Top" Width="48" Click="otraOpcion" HorizontalAlignment="Right">

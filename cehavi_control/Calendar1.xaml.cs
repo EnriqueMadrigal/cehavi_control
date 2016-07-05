@@ -24,6 +24,7 @@ namespace cehavi_control
         private string nombrePaciente = "";
         private string curValue = "";
         private Int32 duracion;
+        private Int32 curTerapeuta = 0;
 
         public string NombrePaciente
         {
@@ -64,11 +65,33 @@ namespace cehavi_control
             }
         }
 
+        public int CurTerapeuta
+        {
+            get
+            {
+                return curTerapeuta;
+            }
+
+            set
+            {
+                curTerapeuta = value;
+            }
+        }
+
         public Calendar1()
         {
             InitializeComponent();
             createFile();
         }
+
+        public Calendar1(Int32 Terapeuta)
+        {
+
+            InitializeComponent();
+            this.curTerapeuta = Terapeuta;
+            createFile();
+        }
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -139,16 +162,33 @@ namespace cehavi_control
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
 
+            StringBuilder jsonData = new StringBuilder();
 
-            file.WriteLine("var curEvents = ");
+            
+
+            //file.WriteLine("var curEvents = ");
 
             DateTime CurTime = DateTime.Now;
             DateTime EndTime = CurTime.AddMonths(1);
 
+            string json = datos1.getJsonEvents(CurTime, EndTime, "IdEvento in (select Id from Terapias where IdTerapeuta=" + this.curTerapeuta.ToString() + ")");
 
-            file.WriteLine(datos1.getJsonEvents(CurTime, EndTime));
-            file.WriteLine(";");
+            if (json.Length!=0)
+            {
+                jsonData.Append("var curEvents = ");
+                jsonData.Append(json);
+                jsonData.Append(";");
 
+            }
+
+            else
+            {
+                jsonData.Append("var curEvent = [];");
+            }
+
+            file.Write(jsonData.ToString());
+
+            
             file.Close();
 
 

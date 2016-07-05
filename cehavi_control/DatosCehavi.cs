@@ -13,7 +13,7 @@ namespace cehavi_control
     class DatosCehavi
     {
         private string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Datos\\cehavi.accdb;Persist Security Info=True";
-       private  OleDbConnection curConnection;
+        private OleDbConnection curConnection;
 
 
         public DatosCehavi()
@@ -21,17 +21,17 @@ namespace cehavi_control
             this.curConnection = new OleDbConnection(this.connectionString);
         }
 
-        
 
-       public  bool Connect()
+
+        public bool Connect()
         {
             try
             {
-                 this.curConnection.Open();
+                this.curConnection.Open();
             }
 
             catch (Exception e)
-             {
+            {
                 MessageBox.Show(e.Message, "Exception: Connect");
                 return false;
             }
@@ -41,7 +41,7 @@ namespace cehavi_control
             return true;
         }
 
-       
+
         private OleDbConnection GetConnection()
         {
 
@@ -69,7 +69,7 @@ namespace cehavi_control
                 adapt.Fill(ds);
                 //this.curConnection.Close();
                 return ds;
-                
+
             }
 
             catch (Exception e)
@@ -94,7 +94,7 @@ namespace cehavi_control
 
             query = "UPDATE " + Table + " SET ";
 
-                       
+
             foreach (Registro c in datos)
             {
 
@@ -109,7 +109,7 @@ namespace cehavi_control
                     query = query + "'";
                 }
 
-                
+
                 else
                 {
                     query = query + c.getValue().ToString();
@@ -125,7 +125,7 @@ namespace cehavi_control
 
             if (GetModified(Table))
             {
-                query = query + "modified = '" + DateTime.Now.ToString() +"',";
+                query = query + "modified = '" + DateTime.Now.ToString() + "',";
 
             }
 
@@ -245,7 +245,7 @@ namespace cehavi_control
 
             //MessageBox.Show(query, "Query");
 
-       
+
 
             try
             {
@@ -309,10 +309,10 @@ namespace cehavi_control
                 foreach (DataColumn column in ds.Columns)
                 {
                     if (column.ColumnName == "created") created = true;
-           
-                 }
 
-         
+                }
+
+
             }
 
             catch (Exception e)
@@ -405,20 +405,20 @@ namespace cehavi_control
 
             try
             {
-                string query = "select " + nombreIndex + " from " + tabla +  " where " + nombreCampo + "='" + nombre + "'";
+                string query = "select " + nombreIndex + " from " + tabla + " where " + nombreCampo + "='" + nombre + "'";
                 OleDbCommand com = new OleDbCommand();
 
                 com.Connection = GetConnection();
                 com.CommandText = query;
                 OleDbDataReader resuldata = com.ExecuteReader();
-                
-                if(resuldata.HasRows)
+
+                if (resuldata.HasRows)
                 {
                     resuldata.Read();
                     curId = resuldata.GetInt32(0);
                 }
 
-            
+
 
 
             }
@@ -446,7 +446,7 @@ namespace cehavi_control
 
             try
             {
-                string query = "insert into " + tabla + "(" + nombreCampo + ")" + " values('" + nombre + "')" ;
+                string query = "insert into " + tabla + "(" + nombreCampo + ")" + " values('" + nombre + "')";
                 string query2 = "Select @@Identity";
 
                 OleDbCommand com = new OleDbCommand();
@@ -469,7 +469,7 @@ namespace cehavi_control
                 return 0;
             }
 
-          return curId;
+            return curId;
 
 
         }
@@ -550,7 +550,7 @@ namespace cehavi_control
 
 
 
-      public DataTable GetEvents()
+        public DataTable GetEvents()
         {
 
             try
@@ -562,7 +562,7 @@ namespace cehavi_control
                 //com.CommandText = "select * FROM Terapias WHERE(DatePart('m', Fecha) = " + startDate.Month.ToString() + ") OR (DatePart('m', Fecha) = " + endDate.Month.ToString() + ") order by IdPaciente";
                 com.CommandText = "select * from terapias order by IdPaciente";
 
-                    OleDbDataAdapter adapt = new OleDbDataAdapter();
+                OleDbDataAdapter adapt = new OleDbDataAdapter();
                 adapt.SelectCommand = com;
                 adapt.Fill(ds);
                 //this.curConnection.Close();
@@ -605,7 +605,7 @@ namespace cehavi_control
                 adapt.SelectCommand = com;
                 adapt.Fill(ds);
                 //this.curConnection.Close();
-                
+
                 comboBox.ItemsSource = ds.DefaultView;
                 comboBox.DisplayMemberPath = ds.Columns[1].ToString();
                 comboBox.SelectedValuePath = ds.Columns[0].ToString();
@@ -715,9 +715,9 @@ namespace cehavi_control
          */
 
 
-        public void CreateCurretEvents(Int32 curTerapia)
+        public void CreateCurrentEvents(Int32 curTerapia)
         {
-           
+
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
 
@@ -730,7 +730,7 @@ namespace cehavi_control
             Int32 CurColor = 0;
             int CurPaciente = 0;
             string ColorPaciente = "#000000";
-        
+
 
 
             foreach (DataRow c in TempData.Rows)
@@ -783,7 +783,7 @@ namespace cehavi_control
                     valores.Add(new Registro("Color", ColorPaciente));
                     valores.Add(new Registro("status1", 0));
                     valores.Add(new Registro("status2", 0));
-
+                    valores.Add(new Registro("IdTipo", 1));
                     datos1.InsertData(valores, "Eventos");
 
 
@@ -805,7 +805,7 @@ namespace cehavi_control
                         EventoFechaEnd = EventoFechaEnd.AddMonths(1);
                     }
 
-                                        
+
 
                 }
 
@@ -816,20 +816,105 @@ namespace cehavi_control
 
             }
 
-          
-
         }
 
-        /////////////////
-
-
-public string getJsonEvents(DateTime startDate, DateTime endDate)
+        public void CreateCitaEvent(Int32 curCita)
         {
 
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
-            
-            DataTable Eventos = datos1.LoadData("select * from Eventos");
+
+            //DataTable TempData = datos1.GetEvents();
+            DataTable TempData = datos1.LoadData("select * from Citas where Id=" + curCita.ToString());
+            DataTable TablaColores = datos1.LoadData("select * from Colores order by Id");
+
+            string NombrePaciente = "";
+            Int16 StatusPaciente = 0;
+            Int32 CurColor = 0;
+            int CurPaciente = 0;
+            string ColorPaciente = "#000000";
+
+
+
+            foreach (DataRow c in TempData.Rows)
+            {
+                Int32 IdEvento = (Int32)c["Id"];
+                Int32 IdPaciente = (Int32)c["IdPaciente"];
+                Int16 Duracion = (Int16)c["Duracion"];
+                Int16 IdTerapueta = (Int16)c["IdTerapeuta"];
+                DateTime AFecha = (DateTime)c["Fecha"];
+
+
+                if (CurPaciente == 0 || IdPaciente != CurPaciente)
+                {
+                    CurPaciente = IdPaciente;
+                    DataTable DatosPaciente = datos1.LoadData("select * from pacientes where IdPaciente=" + IdPaciente.ToString());
+                    NombrePaciente = DatosPaciente.Rows[0]["Nombre"].ToString();
+                    StatusPaciente = (Int16)DatosPaciente.Rows[0]["estatus"];
+                    CurColor = IdPaciente % 55;
+                    ColorPaciente = "#" + TablaColores.Rows[CurColor]["Color"].ToString();
+                }
+
+
+
+                DateTime EventoFechaStart = AFecha;
+                DateTime EventoFechaEnd = EventoFechaStart.AddMinutes(Duracion);
+
+
+
+
+
+
+
+                ArrayList valores = new ArrayList();
+
+                valores.Add(new Registro("IdEvento", IdEvento));
+                valores.Add(new Registro("Title", NombrePaciente));
+                valores.Add(new Registro("start_event", EventoFechaStart.ToString("yyyy-MM-dd HH:mm:ss")));
+                valores.Add(new Registro("end_event", EventoFechaEnd.ToString("yyyy-MM-dd HH:mm:ss")));
+                valores.Add(new Registro("Color", ColorPaciente));
+                valores.Add(new Registro("status1", 0));
+                valores.Add(new Registro("status2", 0));
+                valores.Add(new Registro("IdTipo", 2));
+
+                datos1.InsertData(valores, "Eventos");
+
+
+
+
+            }
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+        /////////////////
+
+
+        public string getJsonEvents(DateTime startDate, DateTime endDate, string criterio)
+        {
+
+            DatosCehavi datos1 = new DatosCehavi();
+            datos1.Connect();
+            string query = "";
+
+            if (criterio.Length == 0) query = "select * from Eventos";
+            else query = "select * from Eventos where " + criterio;
+
+
+            DataTable Eventos = datos1.LoadData(query);
 
             StringBuilder json = new StringBuilder();
 
@@ -839,7 +924,13 @@ public string getJsonEvents(DateTime startDate, DateTime endDate)
 
             json.Append("[");
 
-            
+            if (Eventos.Rows.Count==0)
+            {
+                json.Append("]");
+                return json.ToString();
+            }
+
+
             foreach (DataRow c in Eventos.Rows)
             {
 
@@ -868,7 +959,6 @@ public string getJsonEvents(DateTime startDate, DateTime endDate)
 
     }
 
-
-
-
 }
+
+

@@ -118,7 +118,7 @@ namespace cehavi_control
                 this.Repeticion.SelectedValue = Periodo;
                 this.comboBoxTerapeutas.SelectedValue = IdTerapueta;
                 this.textBox.Text = Duracion.ToString();
-                this.Repeticion.SelectedValue = 1;
+                //this.Repeticion.SelectedValue = 1;
                 this.Fecha.Text = Dias[Dia];
                 this.Hora.Text = Hora.ToShortTimeString();
                 //this.Fecha.Text = curFecha.ToString("yyyy-MM-dd HH:mm:ss");
@@ -147,6 +147,12 @@ namespace cehavi_control
             datos1.Connect();
 
             ArrayList valores = new ArrayList();
+
+            if (this.TerapiaFecha == null)
+            {
+                MessageBox.Show("Selecciona una fecha", "Advertencia");
+                return;
+            }
 
             if (this.TerapiaFecha.Length == 0)
             {
@@ -180,12 +186,25 @@ namespace cehavi_control
 
 
 
-            if (this.curTerapia != 0) datos1.UpdateData(valores, this.curTerapia, "Id", "terapias");
-            else this.curTerapia = datos1.InsertData(valores, "terapias");
+            if (this.curTerapia != 0) 
+            {
+                datos1.UpdateData(valores, this.curTerapia, "Id", "terapias");
+                datos1.executeQuery("delete from eventos where IdTipo=1 and IdEvento=" + this.curTerapia.ToString());
+                datos1.CreateCurrentEvents(this.curTerapia);
+            }
 
+            else 
+            {
+                this.curTerapia = datos1.InsertData(valores, "terapias");
+                
+            }
 
             //MessageBox.Show(curFecha.ToShortDateString(),"Fecha");
             //MessageBox.Show(curFecha.ToShortTimeString(), "Hora");
+
+            
+            
+
 
             this.Close();
 
@@ -195,11 +214,17 @@ namespace cehavi_control
         private void GetFecha_Click(object sender, RoutedEventArgs e)
         {
             string[] Dias = { "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
-            Calendar1 dlg1 = new Calendar1();
+
+            Int32 CurTerapeuta = (Int32)this.comboBoxTerapeutas.SelectedValue;
+
+            Calendar1 dlg1 = new Calendar1(CurTerapeuta);
+
+
 
 
             dlg1.NombrePaciente = this.NombrePaciente;
             dlg1.Duracion = System.Convert.ToInt32(this.textBox.Text);
+            //dlg1.CurTerapeuta = (Int32)this.comboBoxTerapeutas.SelectedValue;
             dlg1.ShowDialog();
             this.TerapiaFecha = dlg1.CurValue;
 
