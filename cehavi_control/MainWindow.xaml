@@ -55,6 +55,20 @@
             </Button>
 
 
+            <Button x:Name="button13" Height="48" VerticalAlignment="Top" Width="48" Click="asistenciasPacientes" HorizontalAlignment="Right">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\asistencia.png" />
+                </Button.Content>
+            </Button>
+
+            <Separator Height="52" Margin="0" VerticalAlignment="Top" Width="2"/>
+            
+            <Button x:Name="button14" Height="48" VerticalAlignment="Top" Width="48" Click="terapeutas_click" HorizontalAlignment="Right">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\empleados.png" />
+                </Button.Content>
+            </Button>
+
 
             <Button x:Name="button10" Height="48" VerticalAlignment="Top" Width="48" Click="otraOpcion" HorizontalAlignment="Right">
                 <Button.Content>

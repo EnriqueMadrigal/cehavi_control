@@ -116,6 +116,22 @@ namespace cehavi_control
 
 
         }
+
+        private void asistenciasPacientes(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void terapeutas_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+
+
         private void newPaciente(object sender, RoutedEventArgs e)
         {
             editpaciente dlg2 = new editpaciente();

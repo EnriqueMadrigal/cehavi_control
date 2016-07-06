@@ -73,9 +73,9 @@
                     <Label x:Name="label5" Content="Años Cumplidos:" HorizontalAlignment="Left" Margin="115,245,0,0" VerticalAlignment="Top" Width="239"/>
                     <Label x:Name="label6" Content="Comentarios:" HorizontalAlignment="Left" Margin="14,267,0,0" VerticalAlignment="Top" Width="102"/>
                     <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="75" Margin="14,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396" AcceptsReturn="True"/>
-                    <Image x:Name="image" HorizontalAlignment="Left" Height="131" Margin="296,9,0,0" VerticalAlignment="Top" Width="120" IsHitTestVisible="False" Source="C:\Datos\res\child1.png" RenderTransformOrigin="1.227,0.344"/>
-                    <Button x:Name="button" Content="Obtener" HorizontalAlignment="Left" Margin="283,144,0,0" VerticalAlignment="Top" Width="63"/>
-                    <Button x:Name="button1" Content="Cargar" HorizontalAlignment="Left" Margin="353,144,0,0" VerticalAlignment="Top" Width="51"/>
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="180" Margin="296,2,0,0" VerticalAlignment="Top" Width="120" IsHitTestVisible="False" Source="C:\Datos\res\child1.png" RenderTransformOrigin="1.227,0.344"/>
+                    <Button x:Name="button" Content="Obtener" HorizontalAlignment="Left" Margin="293,183,0,0" VerticalAlignment="Top" Width="63"/>
+                    <Button x:Name="button1" Content="Cargar" HorizontalAlignment="Left" Margin="363,183,0,0" VerticalAlignment="Top" Width="51" Click="button1_Click"/>
 
 
 
@@ -126,7 +126,7 @@
                 </Grid>
             </TabItem>
 
-          
+
 
 
         </TabControl>

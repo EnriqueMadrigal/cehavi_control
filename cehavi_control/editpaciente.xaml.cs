@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections;
+using Microsoft.Win32;
+using System.Drawing;
+using System.IO;
 
 namespace cehavi_control
 {
@@ -22,13 +25,14 @@ namespace cehavi_control
     public partial class editpaciente : Window
     {
 
-        private int curPaciente = 0;
+        private Int32 curPaciente = 0;
         private DataTable DatosPaciente;
         private DataTable ComboEscuelas;
         private DataTable ComboGrados;
         private DataTable ComboEstado;
         private DataTable ComboEstadosRepublica;
-
+        private BitmapImage personPhoto;
+        private bool newLoadedImage = false;
 
         public editpaciente()
         {
@@ -141,6 +145,35 @@ namespace cehavi_control
                     this.radioButton1.IsChecked = false;
                 }
 
+
+                String photolocation = "C:\\Datos\\images\\" + this.curPaciente.ToString() + ".jpg";  //file name 
+                if (File.Exists(photolocation))
+                {
+
+                    try
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(photolocation);
+                        bitmap.EndInit();
+                        this.image.Source = bitmap;
+                        this.personPhoto = bitmap;
+                    }
+
+                    catch (System.IO.FileNotFoundException)
+                    {
+                        MessageBox.Show("There was an error opening the bitmap." +
+                            "Please check the path.");
+                    }
+
+
+                }
+
+          
+
+
+
+
             }
 
             else
@@ -211,6 +244,11 @@ namespace cehavi_control
                
             }
 
+
+
+
+
+
         }
 
         private void guardaPaciente(object sender, RoutedEventArgs e)
@@ -269,10 +307,35 @@ namespace cehavi_control
 
 
             if (this.curPaciente != 0) datos1.UpdateData(valores, this.curPaciente, "IdPaciente", "pacientes");
-            else datos1.InsertData(valores, "pacientes");
+            else this.curPaciente = datos1.InsertData(valores, "pacientes");
 
 
-            this.Close();
+
+
+
+            if (this.newLoadedImage)
+            {
+                try
+                {
+
+                    JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                    String photolocation = "C:\\Datos\\images\\" + this.curPaciente.ToString() + ".jpg";  //file name 
+                    
+                    //encoder.Frames.Add(BitmapFrame.Create(this.personPhoto));
+                    encoder.Frames.Add(BitmapFrame.Create((BitmapImage) this.image.Source ));
+                    using (var filestream = new FileStream(photolocation, FileMode.Create))
+                    encoder.Save(filestream);
+                }
+                catch (Exception ex)
+                {
+                  MessageBox.Show("Unable to save now.");
+                 
+                }
+
+            }
+
+
+                this.Close();
 
 
         }
@@ -325,11 +388,45 @@ namespace cehavi_control
 
         }
 
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
 
-    
-     
+            //// Load Image
+            string curFileName = "";
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+          
+
+                if (openFileDialog.ShowDialog() == true) curFileName  = openFileDialog.FileName;
+
+            else return;
+
+            MessageBox.Show("Archivo", openFileDialog.FileName);
+            try
+            {
+
+                string selectedFileName = openFileDialog.FileName;
+               // FileNameLabel.Content = selectedFileName;
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(selectedFileName);
+                bitmap.EndInit();
+                this.image.Source = bitmap;
+                this.personPhoto = bitmap;
+                this.newLoadedImage = true;
 
 
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("There was an error opening the bitmap." +
+                    "Please check the path.");
+            }
+
+
+
+
+        }
     }
 }
 
