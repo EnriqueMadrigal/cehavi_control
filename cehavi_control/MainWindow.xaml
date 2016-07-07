@@ -29,13 +29,13 @@
             <Separator Height="52" Margin="0" VerticalAlignment="Top" Width="2"/>
             <Button x:Name="button2" Height="48" VerticalAlignment="Top" Width="48" Click="muestraPaciente">
                 <Button.Content>
-                    <Image Source="C:\Datos\res\directory.png" />
+                    <Image Source="C:\Datos\res\pacientes.png" />
                 </Button.Content>
             </Button>
 
             <Button x:Name="button3" Height="48" VerticalAlignment="Top" Width="48" Click="newPaciente">
                 <Button.Content>
-                    <Image Source="C:\Datos\res\customer.png" />
+                    <Image Source="C:\Datos\res\pacientesplus.png" />
                 </Button.Content>
             </Button>
             <Separator Height="52" Margin="0" VerticalAlignment="Top" Width="2"/>
@@ -68,6 +68,14 @@
                     <Image Source="C:\Datos\res\empleados.png" />
                 </Button.Content>
             </Button>
+
+            <Button x:Name="button15" Height="48" VerticalAlignment="Top" Width="48" Click="newTerapeuta" HorizontalAlignment="Right">
+                <Button.Content>
+                    <Image Source="C:\Datos\res\empleadosplus.png" />
+                </Button.Content>
+            </Button>
+            <Separator Height="52" Margin="0" VerticalAlignment="Top" Width="2"/>
+
 
 
             <Button x:Name="button10" Height="48" VerticalAlignment="Top" Width="48" Click="otraOpcion" HorizontalAlignment="Right">

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Data;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -12,33 +11,30 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
+using System.IO;
 using System.Collections;
 using Microsoft.Win32;
-using System.Drawing;
-using System.IO;
 
 namespace cehavi_control
 {
     /// <summary>
-    /// Interaction logic for editpaciente.xaml
+    /// Interaction logic for editterapeuta.xaml
     /// </summary>
-    public partial class editpaciente : Window
+    public partial class editterapeuta : Window
     {
 
         private Int32 curPaciente = 0;
         private DataTable DatosPaciente;
-        private DataTable ComboEscuelas;
-        private DataTable ComboGrados;
         private DataTable ComboEstado;
         private DataTable ComboEstadosRepublica;
         private BitmapImage personPhoto;
         private bool newLoadedImage = false;
 
-        public editpaciente()
+        public editterapeuta()
         {
             InitializeComponent();
         }
-
 
 
 
@@ -62,16 +58,6 @@ namespace cehavi_control
             datos1.Connect();
 
 
-            ComboGrados = datos1.LoadData("select * from Grados");
-            this.comboBox1.ItemsSource = ComboGrados.DefaultView;
-            this.comboBox1.DisplayMemberPath = ComboGrados.Columns[1].ToString();
-            this.comboBox1.SelectedValuePath = ComboGrados.Columns[0].ToString();
-
-            ComboEscuelas = datos1.LoadData("select * from Escuelas");
-            this.comboBox2.ItemsSource = ComboEscuelas.DefaultView;
-            this.comboBox2.DisplayMemberPath = ComboEscuelas.Columns[1].ToString();
-            this.comboBox2.SelectedValuePath = ComboEscuelas.Columns[0].ToString();
-
             ComboEstado = datos1.LoadData("select * from estado_paciente");
             this.comboBox3.ItemsSource = ComboEstado.DefaultView;
             this.comboBox3.DisplayMemberPath = ComboEstado.Columns[1].ToString();
@@ -85,19 +71,15 @@ namespace cehavi_control
 
             if (this.curPaciente != 0)
             {
-                this.DatosPaciente = datos1.LoadData("select Nombre,Comentarios,Sexo,IdEscuela,IdGradoEscuela, Datepart('yyyy',FechaNac),DatePart('m',FechaNac),Datepart('d',FechaNac),estatus, calle, exterior, interior,cp,telefonocasa,telefonorecados,telefonocel,idciudad,idmunicipio,idcolonia, idestado, email from pacientes where IdPaciente=" + this.curPaciente.ToString());
-                this.comboBox1.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["IdGradoEscuela"].ToString());
-                // ComboBoxZone.SelectedValue.ToString());
-
-                this.comboBox2.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["IdEscuela"].ToString());
+                this.DatosPaciente = datos1.LoadData("select Nombre,Comentarios,Sexo, Datepart('yyyy',FechaNac),DatePart('m',FechaNac),Datepart('d',FechaNac),estatus, calle, exterior, interior,cp,telefonocasa,telefonorecados,telefonocel,idciudad,idmunicipio,idcolonia, idestado, email from terapeutas where Id=" + this.curPaciente.ToString());
                 this.comboBox3.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["estatus"].ToString());
                 this.comboBox4.SelectedValue = Convert.ToInt32(DatosPaciente.Rows[0]["idestado"].ToString());
 
                 String NombrePaciente = DatosPaciente.Rows[0]["Nombre"].ToString();
 
-                Int32 AnoNac = Convert.ToInt32(DatosPaciente.Rows[0][5].ToString());
-                Int32 MesNac = Convert.ToInt32(DatosPaciente.Rows[0][6].ToString());
-                Int32 DiaNac = Convert.ToInt32(DatosPaciente.Rows[0][7].ToString());
+                Int32 AnoNac = Convert.ToInt32(DatosPaciente.Rows[0][3].ToString());
+                Int32 MesNac = Convert.ToInt32(DatosPaciente.Rows[0][4].ToString());
+                Int32 DiaNac = Convert.ToInt32(DatosPaciente.Rows[0][5].ToString());
                 Int32 Sexo = Convert.ToInt32(DatosPaciente.Rows[0]["Sexo"].ToString());
 
 
@@ -146,7 +128,7 @@ namespace cehavi_control
                 }
 
 
-                String photolocation = "C:\\Datos\\images\\" + this.curPaciente.ToString() + ".jpg";  //file name 
+                String photolocation = "C:\\Datos\\personal\\" + this.curPaciente.ToString() + ".jpg";  //file name 
                 if (File.Exists(photolocation))
                 {
 
@@ -169,7 +151,7 @@ namespace cehavi_control
 
                 }
 
-          
+
 
 
 
@@ -178,8 +160,7 @@ namespace cehavi_control
 
             else
             {
-                this.comboBox1.SelectedValue = 1;
-                this.comboBox2.SelectedValue = 1;
+               
                 this.comboBox3.SelectedValue = 1;
                 this.comboBox4.SelectedValue = 14;
                 this.FechaNac_DatePicker.SelectedDate = DateTime.Today;
@@ -210,7 +191,7 @@ namespace cehavi_control
         }
 
 
-     
+    
         private void guardaPaciente(object sender, RoutedEventArgs e)
         {
 
@@ -225,30 +206,24 @@ namespace cehavi_control
 
             if (NombrePaciente.Length < 5)
             {
-                MessageBox.Show("El nombre es invalido!", "Advertencia:");
+                MessageBox.Show("El nombre es invalido", "Advertencia:");
                 return;
             }
 
-
-            if (this.FechaNac_DatePicker.SelectedDate== null)
+            if (this.FechaNac_DatePicker.SelectedDate == null)
             {
                 MessageBox.Show("La Fecha de naciemiento es invalida!", "Advertencia:");
                 return;
             }
 
-
-
             valores.Add(new Registro("Nombre", NombrePaciente));
             valores.Add(new Registro("FechaNac", this.FechaNac_DatePicker.SelectedDate));
             valores.Add(new Registro("Sexo", Sexo));
-            valores.Add(new Registro("IdGradoEscuela", this.comboBox1.SelectedValue));
-            valores.Add(new Registro("IdEscuela", this.comboBox2.SelectedValue));
-            valores.Add(new Registro("terapias", 1));
-
+            
             valores.Add(new Registro("estatus", this.comboBox3.SelectedValue));
+            valores.Add(new Registro("idestado", this.comboBox4.SelectedValue));
             valores.Add(new Registro("calle", this.Calle.Text));
             valores.Add(new Registro("cp", this.CodigoPostal.Text));
-            valores.Add(new Registro("idestado", this.comboBox4.SelectedValue));
 
             valores.Add(new Registro("exterior", this.exterior.Text));
             valores.Add(new Registro("interior", this.interior.Text));
@@ -276,8 +251,8 @@ namespace cehavi_control
 
 
 
-            if (this.curPaciente != 0) datos1.UpdateData(valores, this.curPaciente, "IdPaciente", "pacientes");
-            else this.curPaciente = datos1.InsertData(valores, "pacientes");
+            if (this.curPaciente != 0) datos1.UpdateData(valores, this.curPaciente, "IdPaciente", "terapeutas");
+            else this.curPaciente = datos1.InsertData(valores, "terapeutas");
 
 
 
@@ -289,23 +264,23 @@ namespace cehavi_control
                 {
 
                     JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                    String photolocation = "C:\\Datos\\images\\" + this.curPaciente.ToString() + ".jpg";  //file name 
-                    
+                    String photolocation = "C:\\Datos\\personal\\" + this.curPaciente.ToString() + ".jpg";  //file name 
+
                     //encoder.Frames.Add(BitmapFrame.Create(this.personPhoto));
-                    encoder.Frames.Add(BitmapFrame.Create((BitmapImage) this.image.Source ));
+                    encoder.Frames.Add(BitmapFrame.Create((BitmapImage)this.image.Source));
                     using (var filestream = new FileStream(photolocation, FileMode.Create))
-                    encoder.Save(filestream);
+                        encoder.Save(filestream);
                 }
                 catch (Exception ex)
                 {
-                  MessageBox.Show("Unable to save now.");
-                 
+                    MessageBox.Show("Unable to save now.");
+
                 }
 
             }
 
 
-                this.Close();
+            this.Close();
 
 
         }
@@ -365,9 +340,9 @@ namespace cehavi_control
             string curFileName = "";
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
-          
 
-                if (openFileDialog.ShowDialog() == true) curFileName  = openFileDialog.FileName;
+
+            if (openFileDialog.ShowDialog() == true) curFileName = openFileDialog.FileName;
 
             else return;
 
@@ -376,7 +351,7 @@ namespace cehavi_control
             {
 
                 string selectedFileName = openFileDialog.FileName;
-               // FileNameLabel.Content = selectedFileName;
+                // FileNameLabel.Content = selectedFileName;
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri(selectedFileName);
@@ -397,7 +372,6 @@ namespace cehavi_control
 
 
         }
+
     }
 }
-
-

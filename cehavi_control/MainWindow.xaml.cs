@@ -125,10 +125,31 @@ namespace cehavi_control
 
         private void terapeutas_click(object sender, RoutedEventArgs e)
         {
+            int curPaciente = 0;
 
+           
+            listageneral dlg1 = new listageneral();
+            dlg1.setIndexName("Id");
+            dlg1.setNameIndex("Nombre");
+            dlg1.setTable("terapeutas");
+
+            dlg1.ShowDialog();
+            curPaciente = dlg1.curId;
+
+            if (curPaciente == 0) return;
+
+            // MessageBox.Show(curPaciente.ToString(), "Paciente Seleccionado");
+            editterapeuta dlg2 = new editterapeuta();
+            dlg2.SetPaciente(curPaciente);
+            dlg2.ShowDialog();
         }
 
 
+        private void newTerapeuta(object sender, RoutedEventArgs e)
+        {
+            editterapeuta dlg2 = new editterapeuta();
+            dlg2.ShowDialog();
+        }
 
 
 
@@ -146,7 +167,7 @@ namespace cehavi_control
 
         private void otraOpcion(object sender, RoutedEventArgs e)
         {
-            // return;
+             return;
 
             /*
 
@@ -202,8 +223,9 @@ namespace cehavi_control
   */
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
-            datos1.executeQuery("delete from Terapias");
-            datos1.executeQuery("delete from Citas");
+            //datos1.executeQuery("delete from terapeutas");
+            //datos1.executeQuery("ALTER TABLE terapeutas ALTER COLUMN Id COUNTER(1,1)");
+            //datos1.executeQuery("delete from Citas");
 
             return;
 

@@ -65,6 +65,9 @@
     <Compile Include="citas.xaml.cs">
       <DependentUpon>citas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="editterapeuta.xaml.cs">
+      <DependentUpon>editterapeuta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="listageneral.xaml.cs">
       <DependentUpon>listageneral.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="editpaciente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="editterapeuta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
