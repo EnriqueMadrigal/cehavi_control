@@ -1,0 +1,39 @@
+﻿<Window x:Class="cehavi_control.asistencias"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cehavi_control"
+        mc:Ignorable="d"
+        Title="asistencias" Height="545.277" Width="692" Loaded="Window_Loaded">
+
+
+
+    <Grid>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="445" Margin="43,28,0,0" VerticalAlignment="Top" Width="353">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Photo" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding  Path=ImagePath}" Height="100" Width="80"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                        
+                        
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" Width="180" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Hora" Width="80" DisplayMemberBinding="{Binding Hora}" />
+
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <DatePicker x:Name="datepicker1" HorizontalAlignment="Left" Margin="481,37,0,0" VerticalAlignment="Top" Width="141" SelectedDateChanged="datepicker1_SelectedDateChanged"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="547,85,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+
+</Window>
+    
+    

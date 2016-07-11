@@ -120,6 +120,10 @@ namespace cehavi_control
         private void asistenciasPacientes(object sender, RoutedEventArgs e)
         {
 
+            asistencias dlg1 = new asistencias();
+            dlg1.ShowDialog();
+
+
         }
 
 

@@ -251,7 +251,7 @@ namespace cehavi_control
 
 
 
-            if (this.curPaciente != 0) datos1.UpdateData(valores, this.curPaciente, "IdPaciente", "terapeutas");
+            if (this.curPaciente != 0) datos1.UpdateData(valores, this.curPaciente, "Id", "terapeutas");
             else this.curPaciente = datos1.InsertData(valores, "terapeutas");
 
 

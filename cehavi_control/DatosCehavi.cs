@@ -133,7 +133,7 @@ namespace cehavi_control
             query = query.Remove(query.Length - 1);
             query = query + " WHERE " + NameIndex + "=" + curRegistro.ToString();
 
-            //MessageBox.Show(query, "Query");
+            MessageBox.Show(query, "Query");
 
 
 
@@ -956,6 +956,8 @@ namespace cehavi_control
 
         }
 
+
+      
 
     }
 
