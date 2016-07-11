@@ -227,7 +227,12 @@ namespace cehavi_control
   */
             DatosCehavi datos1 = new DatosCehavi();
             datos1.Connect();
-            //datos1.executeQuery("delete from terapeutas");
+            datos1.executeQuery("insert into EstadoEventos1(Id,Nombre) values(0,'Pendiente')");
+            datos1.executeQuery("insert into EstadoEventos1(Id,Nombre) values(1,'Asistio')");
+            datos1.executeQuery("insert into EstadoEventos1(Id,Nombre) values(2,'No Asistio')");
+            datos1.executeQuery("insert into EstadoEventos1(Id,Nombre) values(3,'Cancelo')");
+            datos1.executeQuery("insert into EstadoEventos1(Id,Nombre) values(4,'Cambio Fecha')");
+
             //datos1.executeQuery("ALTER TABLE terapeutas ALTER COLUMN Id COUNTER(1,1)");
             //datos1.executeQuery("delete from Citas");
 

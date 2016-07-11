@@ -68,8 +68,10 @@ namespace cehavi_control
 
             DataTable DatosAsistencias = new DataTable("Terapias");
             DatosAsistencias.Columns.Add("IdEvento", Type.GetType("System.Int32"));
-            DatosAsistencias.Columns.Add("Name", Type.GetType("System.String"));
+            DatosAsistencias.Columns.Add("Nombre", Type.GetType("System.String"));
             DatosAsistencias.Columns.Add("Hora", Type.GetType("System.String"));
+            DatosAsistencias.Columns.Add("Estado", Type.GetType("System.String"));
+            DatosAsistencias.Columns.Add("Tipo", Type.GetType("System.String"));
             DatosAsistencias.Columns.Add("ImagePath", Type.GetType("System.String"));
 
             foreach (DataRow c in EventosTemp.Rows)
@@ -79,10 +81,13 @@ namespace cehavi_control
                 Int32 Id = (Int32)c["Id"];
                 Int32 IdEvento = (Int32)c["IdEvento"];
                 Byte IdTipo = (Byte)c["IdTipo"];
+                Byte Estatus1 = (Byte)c["status1"];
+                Byte Estatus2 = (Byte)c["status2"];
                 DateTime startFecha = (DateTime)c["start_event"];
                 Int32 IdPaciente = 0;
                 string NombrePaciente;
                 string ImagePath = "";
+                string TipoEvento = "Terapia";
                 
 
                 if (IdTipo==1)
@@ -97,11 +102,14 @@ namespace cehavi_control
                 {
                     DataTable DatosCita = datos1.LoadData("select * from Citas where Id=" + IdEvento.ToString());
                     IdPaciente = (Int32)DatosCita.Rows[0]["IdPaciente"];
+                    TipoEvento = "Cita";
                 }
 
                 DataTable DatosPaciente = datos1.LoadData("select * from pacientes where IdPaciente=" + IdPaciente.ToString());
                 NombrePaciente = DatosPaciente.Rows[0]["Nombre"].ToString();
                 Int16 Sexo = (Int16) DatosPaciente.Rows[0]["Sexo"];
+
+                string EstadoEvento = datos1.GetNombreTabla(Estatus1, "EstadoEventos1", "Id", "Nombre");
 
                 String photolocation = "C:\\Datos\\images\\" + IdPaciente.ToString() + ".jpg";  //file name 
                 if (File.Exists(photolocation)) ImagePath = photolocation;
@@ -114,7 +122,7 @@ namespace cehavi_control
                 }
 
 
-                DatosAsistencias.Rows.Add(Id, NombrePaciente, startFecha.ToShortTimeString(), ImagePath);
+                DatosAsistencias.Rows.Add(Id, NombrePaciente, startFecha.ToShortTimeString(),EstadoEvento, TipoEvento,ImagePath);
                 
 
                 }
@@ -124,7 +132,30 @@ namespace cehavi_control
 
         }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void button_Click1(object sender, RoutedEventArgs e)
+        {
+
+            MessageBox.Show("Clicked");
+
+            object item = this.listView.SelectedItem;
+
+
+        }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           // MessageBox.Show("Clicked");
+
+            object item = this.listView.SelectedItem;
+
+
+            loadDatos();
+        }
     }
 
 
