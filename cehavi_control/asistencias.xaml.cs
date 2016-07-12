@@ -149,12 +149,29 @@ namespace cehavi_control
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           // MessageBox.Show("Clicked");
+            //MessageBox.Show("Clicked");
 
             object item = this.listView.SelectedItem;
+            Int32 curId = 0;
+            DataRowView curRow;
 
+            if (item == null) return;
+            if (item is System.Data.DataRowView)
+            {
+                curRow = (DataRowView)item;
+                curId = (Int32)curRow.Row["IdEvento"];
+            }
 
+            else  return;
+
+            cambiaestado1 dlg1 = new cambiaestado1();
+            dlg1.CurEvento = curId;
+            dlg1.ShowDialog();
+
+            if (dlg1.Estado_cambio == false) return;
+            MessageBox.Show("Cambio realizado", "Advertencia");
             loadDatos();
+
         }
     }
 

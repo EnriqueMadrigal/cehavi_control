@@ -62,6 +62,9 @@
     <Compile Include="Calendar1.xaml.cs">
       <DependentUpon>Calendar1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="cambiaestado1.xaml.cs">
+      <DependentUpon>cambiaestado1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="cita.xaml.cs">
       <DependentUpon>cita.xaml</DependentUpon>
     </Compile>
@@ -87,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Calendar1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="cambiaestado1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
