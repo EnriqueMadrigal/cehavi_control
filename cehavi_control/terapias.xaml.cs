@@ -182,6 +182,9 @@ namespace cehavi_control
 
                 MessageBox.Show("Se elimino el registro", "Información");
 
+
+
+
                 CargaTerapias();
             }
 
